@@ -1,0 +1,210 @@
+@charset "UTF-8";
+
+html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
+#bodySection {
+    margin: auto;
+    height: 70%;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+#side-bar {
+    box-sizing: border-box;
+    height: 100%;
+    width: 20%;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-right: 1px solid #ccc;
+    display: inline-block;
+}
+
+#side-bar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#side-bar ul li {
+    margin-bottom: 20px;
+}
+
+#side-bar ul li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#side-bar ul li a:hover {
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+
+/* 여기까지 사이드바 */
+
+
+.content {
+    box-sizing: border-box;
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.info {
+    margin-bottom: 20px;
+}
+#user-info {
+    margin: auto;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin: 0px 20px;
+    width: 90%;
+    padding: 30px 30px;
+    border-radius: 10px;
+    
+}
+
+
+
+.content td {padding-bottom: 5px;}
+
+
+/* 여기까지 myInfo */
+
+
+.comment-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.comment-item {
+    display: flex;
+    align-items: center;
+    padding: 30px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.comment-info {
+    margin: 5px;
+}
+
+.comment-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.comment-info h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+.comment-info h5 {
+    margin: 0;
+}
+
+.comment-info p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* 여기까지 myComment */
+
+
+.group-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.group-item {
+    display: flex;
+    align-items: center;
+    padding: 30px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.group-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.group-info h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.group-info p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* 여기까지 mySocial */
+
+.bookmark-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.bookmark-item {
+    display: flex;
+    align-items: center;
+    padding: 30px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.bookmark-item img {
+    width: 20px;
+    height: 25px;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.bookmark-info h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.bookmark-info p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.bookmark-item {
+    position: relative;
+}
+.bookmark-icon {
+    position: absolute;
+    top: 10px;  /* 우측 상단으로부터의 거리 조정 */
+    right: 10px; /* 우측 상단으로부터의 거리 조정 */
+    width: 20px;  /* 북마크 아이콘의 크기 설정 */
+    height: 20px; /* 북마크 아이콘의 크기 설정 */
+}
+
+/* 여기까지 myBookmark */
