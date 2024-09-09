@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.hh.board.model.dao.MyBookmarkDao;
 import com.hh.board.model.dao.MyReplyDao;
 import com.hh.board.model.dao.MySocialDao;
+import com.hh.board.model.vo.MyBookmark;
 import com.hh.board.model.vo.MyReply;
 import com.hh.board.model.vo.MySocial;
 
@@ -23,8 +25,6 @@ public class MyPageService {
 		return msList; 
 	}
 	
-	
-	
 	public List<MyReply> selectMyReply(String memberNo) {
 		List<MyReply> mrList = null;
 		SqlSession sqlSession = DBTemplate.getSqlSession();
@@ -32,5 +32,13 @@ public class MyPageService {
 		sqlSession.close();
 		return  mrList;
 		
+	}
+
+	public List<MyBookmark> selectMyBookmark(String memberNo) {
+		List<MyBookmark> mbList = null;
+		SqlSession sqlsession = DBTemplate.getSqlSession();
+		mbList = new MyBookmarkDao().selectMyBookmark(sqlsession, memberNo);
+		sqlsession.close();
+		return mbList;
 	}
 }

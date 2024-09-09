@@ -34,4 +34,21 @@
 			JOIN CATEGORYBOARD D ON (C.KBNO=D.KBNO)
 		WHERE A.MNO = #{memberNo}
 	</select>
+	
+	<resultMap id="myBookmarkSet" type="MyBookmark">
+		<result column="bno" property="boardNo" />
+		<result column="btitle" property="title" />
+		<result column="bcontent" property="description" />
+		<result column="cbimg" property="img" />
+	</resultMap>
+	<select id="MyBookmark" resultMap="myBookmarkSet">
+		SELECT A.BNO, A.BTITLE, A.BCONTENT, C.CBIMG
+		FROM BOARD A
+    		JOIN KINDOFBOARD B ON (A.KBNO = B.KBNO)
+    		JOIN CATEGORYBOARD C ON (B.KBNO = C.KBNO)
+    		JOIN BOOKCATEGORY D ON (C.CBNO = D.CBNO)
+    		JOIN BOOKMARK E ON (D.BNO = E.BNO)
+		WHERE E.MNO = #{memberNo}
+	</select>
+	
 </mapper>

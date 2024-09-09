@@ -17,7 +17,7 @@
         <div class="content">
             <div class="bookmark-list">
             
-            	<a href="#">
+            	<!-- <a href="#">
 	                <div class="bookmark-item">
 	                    <img src="img/Icon.jpg" alt="" class="bookmark-icon">
 	                    <img src="img/group1.png" alt="Group Image">
@@ -26,7 +26,7 @@
 	                        <p>Group Description</p>
 	                    </div>
 	                </div>
-                </a>
+                </a> -->
                 
             </div>
         </div>
@@ -37,8 +37,9 @@
     <script>
     	$.ajax({
     		url: '/hobbyharvest/myBookmark.do',
-    		type: 'get',
-    		data: {data: 'userInfo.mno'},
+    		type: 'post',
+    		data: {data: ${userInfo.memberNo}},
+    		dataType: 'json',
     		success: function(result) {
     			let bookmarkList = result;
     			console.log(result);
