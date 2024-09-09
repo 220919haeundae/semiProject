@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1문의</title>
-<link rel="stylesheet"
-	href="http://localhost:8080/MemberCenter/views/css/myPage.css">
+<link rel="stylesheet" href="http://localhost:8080/hobbyharvest/views/css/csPage.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -74,7 +73,7 @@
 				<li class="page-item"><a class="page-link" href="#">32</a></li>
 				<li class="page-item"><a class="page-link" href="#">Next</a></li>
 			</ul>
-			<button type="button" class="btn btn-secondary col-sm-1" style="height:40px;">글쓰기</button>
+			<button type="button" class="btn btn-secondary col-sm-1" style="height:40px;"><a href="<%=request.getContextPath() %>/toIwPage.do">글쓰기</a></button>
 		</div>
 	</div>
 	</div>

@@ -16,30 +16,18 @@
     <jsp:include page="myPageNav.jsp"></jsp:include>
         <div class="content">
             <div class="bookmark-list">
-                <div class="bookmark-item">
-                    <img src="img/Icon.jpg" alt="" class="bookmark-icon">
-                    <img src="img/group1.png" alt="Group Image">
-                    <div class="bookmark-info">
-                        <h3>Group Title</h3>
-                        <p>Group Description</p>
-                    </div>
-                </div>
-                <div class="bookmark-item">
-                    <img src="img/Icon.jpg" alt="" class="bookmark-icon">
-                    <img src="img/group2.png" alt="Group Image">
-                    <div class="bookmark-info">
-                        <h3>Group Title</h3>
-                        <p>Group Description</p>
-                    </div>
-                </div>
-                <div class="bookmark-item">
-                    <img src="img/Icon.jpg" alt="" class="bookmark-icon">
-                    <img src="img/group2.png" alt="Group Image">
-                    <div class="bookmark-info">
-                        <h3>Group Title</h3>
-                        <p>Group Description</p>
-                    </div>
-                </div>
+            
+            	<a href="#">
+	                <div class="bookmark-item">
+	                    <img src="img/Icon.jpg" alt="" class="bookmark-icon">
+	                    <img src="img/group1.png" alt="Group Image">
+	                    <div class="bookmark-info">
+	                        <h3>Group Title</h3>
+	                        <p>Group Description</p>
+	                    </div>
+	                </div>
+                </a>
+                
             </div>
         </div>
     </div>
@@ -52,7 +40,40 @@
     		type: 'get',
     		data: {data: 'userInfo.mno'},
     		success: function(result) {
-    			$('.content').html('<h3>북마크 기능 준비중<h3>');
+    			let bookmarkList = result;
+    			console.log(result);
+    			for(let bookmark of bookmarkList) {
+    				
+    				let a = document.createElement("a");
+        			let bookmarkItem = document.createElement("div");
+        			let img1 = document.createElement("img");
+        			let img2 = document.createElement("img");
+        			let bookmarkInfo = document.createElement("div");
+        			let h3 = document.createElement("h3");
+        			let p = document.createElement("p");
+        			
+        			a.href = "<%request.getContextPath();%>/서블릿?boardNo="+bookmark.boardNo;
+        			bookmarkItem.className = 'bookmark-item';
+        			img1.src = "D://upload"+bookmark.img;
+        			img2.src = "D://upload"+"기본이미지경로";
+        			bookmarkInfo.className = "bookmark-Info";
+        			h3.textContent = bookmark.title;
+        			p.textContent = bookmark.description;
+        			
+        			a.appendChild(bookmarkItem);
+        			bookmarkItem.appendChild(img1);
+        			bookmarkItem.appendChild(img2);
+        			bookmarkItem.appendChild(bookmarkInfo);
+        			bookmarkInfo.appendChild(h3);
+        			bookmarkInfo.appendChild(p);
+        			
+        			document.getElementsByClassName("bookmark-list")[0].appendChild(a);
+    				
+    			}
+    			
+    			
+    			
+    			
     		},
     		error: function(error) {
     			alert('서버 통신 실패');

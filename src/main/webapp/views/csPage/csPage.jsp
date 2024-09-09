@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +22,11 @@
                 <div id="side-bar">
                     <ul>
                         <li><a href="toFaqPage.do" id="#">자주 묻는 질문</a></li>
-                        <li><a href="toPiPage.do" id="#">1:1 문의</a></li>
+                        
+                        <%-- <c:if test="${ !empty loginUser }"> --%>
+                        	<li><a href="toPiPage.do" id="#">1:1 문의</a></li>
+                        <%-- </c:if> --%>
+                        
                     </ul>
                 </div>
                 

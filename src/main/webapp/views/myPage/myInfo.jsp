@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.hh.member.model.vo.Member" %>
+    pageEncoding="UTF-8"%>
     <!DOCTYPE html>
     <html lang="en">
 <head>
@@ -14,10 +14,6 @@
 </head>
 <body>
     <jsp:include page="myPageNav.jsp"></jsp:include>
-    <%
-    Member m = new Member(1, "mId", "mPw", "mNickName", "email", "address", "phone");
-    request.getSession().setAttribute("userInfo", m);
-    %>
         <div class="content">
         <div id="user-info">
         <h2>기본정보</h2>
@@ -25,7 +21,7 @@
             <table>
                 <tr>
                     <td rowspan="2" style="vertical-align: middle; width: 0;"><img src="views/img/user_img.png" alt=""></td>
-                    <td>${ userInfo.mId }</td>
+                    <td>${ userInfo.memberId }</td>
                 </tr>
                 <tr>
                     <td style="padding-left: 10px" >${ userInfo.email }</td>

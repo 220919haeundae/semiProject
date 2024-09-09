@@ -1,29 +1,23 @@
 package com.hh.mypage.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.hh.board.model.vo.MyReply;
-import com.hh.member.model.service.MyPageService;
-
 /**
- * Servlet implementation class MyCommentController1
+ * Servlet implementation class IwPageController
  */
-@WebServlet("/myComment.do")
-public class MyCommentController1 extends HttpServlet {
+@WebServlet("/toIwPage.do")
+public class IwPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyCommentController1() {
+    public IwPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +26,7 @@ public class MyCommentController1 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String memberNo = request.getParameter("data");
-		List<MyReply> mrList = new MyPageService().selectMyReply(memberNo);
-		
-			Gson gson = new Gson();
-			response.setContentType("application/json; charset=utf-8");
-			gson.toJson(mrList, response.getWriter());
+		request.getRequestDispatcher("views/csPage/iwPage.jsp").forward(request, response);
 	}
 
 	/**
