@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+
+	<resultMap id="mySocialSet" type="MySocial">
+		<result column="btitle" property="title" />
+		<result column="bcontent" property="description" />
+		<result column="bno" property="boardNo" />
+		<result column="cbimg" property="img" />
+	</resultMap>
+	<select id="mySocial" resultMap="mySocialSet">
+		SELECT A.BTITLE, A.BCONTENT, A.BNO, C.CBIMG
+		FROM BOARD A
+			JOIN KINDOFBOARD B ON (A.KBNO = B.KBNO)
+			JOIN CATEGORYBOARD C ON (B.KBNO = C.KBNO)
+		WHERE A.MNO = #{memberNo}
+	</select>
+
+
+	<resultMap id="myReplySet" type="MyReply">
+		<result column="btitle" property="title" />
+		<result column="Rcontent" property="reply" />
+		<result column="bno" property="boardNo" />
+		<result column="cbimg" property="img" />
+	</resultMap>
+	<select id="myReply" resultMap="myReplySet">
+		SELECT B.BTITLE, A.RCONTENT, A.BNO, D.CBIMG
+		FROM REPLY A
+			JOIN BOARD B ON (A.BNO = B.BNO)
+			JOIN KINDOFBOARD C ON (B.KBNO = B.KBNO)
+			JOIN CATEGORYBOARD D ON (C.KBNO=D.KBNO)
+		WHERE A.MNO = #{memberNo}
+	</select>
+	
+	<resultMap id="myBookmarkSet" type="MyBookmark">
+		<result column="bno" property="boardNo" />
+		<result column="btitle" property="title" />
+		<result column="bcontent" property="description" />
+		<result column="cbimg" property="img" />
+	</resultMap>
+	<select id="MyBookmark" resultMap="myBookmarkSet">
+		SELECT A.BNO, A.BTITLE, A.BCONTENT, C.CBIMG
+		FROM BOARD A
+    		JOIN KINDOFBOARD B ON (A.KBNO = B.KBNO)
+    		JOIN CATEGORYBOARD C ON (B.KBNO = C.KBNO)
+    		JOIN BOOKCATEGORY D ON (C.CBNO = D.CBNO)
+    		JOIN BOOKMARK E ON (D.BNO = E.BNO)
+		WHERE E.MNO = #{memberNo}
+	</select>
+	
+</mapper>
