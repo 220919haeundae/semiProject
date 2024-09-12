@@ -61,6 +61,32 @@ public class MemberService {
 		return result;
 	}
 	
+	public int deleteMember(Member m) {
+		int result = 0;
+		SqlSession sqlSession = MybatisTemplate.getSqlSession();
+		result = mDao.deleteMember(sqlSession, m);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		
+		return result;
+	}
+	public int updateMember(Member m) {
+		SqlSession sqlSession = MybatisTemplate.getSqlSession();
+		int result = new MemberDao().updateMember(sqlSession, m);
+		
+		if(result>0) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		return result;
+	}
 	
 
 }

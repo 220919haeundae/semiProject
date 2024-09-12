@@ -11,8 +11,6 @@
 
 	<%
 	String contextPath = request.getContextPath();
-	Member m = new Member(1, "mId", "mPw", "mNickName", "email", "address", "phone");
-	request.getSession().setAttribute("userInfo", m);
 	%>
 	<!-- Header -->
 	<header>
@@ -27,14 +25,57 @@
 					onclick="toMyInfo();">내 정보 확인</a></li>
 				<li><a href="<%=contextPath%>/toMySocial.do" id="toMySocial"
 					onclick="toMySocial();">내 모임</a></li>
-				<li><a href="<%=contextPath%>/toMyComment.do"
-					id="toMyComment" onclick="toMyComment();">내가 작성한 댓글</a></li>
+				<li><a href="<%=contextPath%>/toMyComment.do" id="toMyComment"
+					onclick="toMyComment();">내가 작성한 댓글</a></li>
 				<li><a href="<%=contextPath%>/toMyBookmark.do"
 					id="toMyBookmark" onclick="toMyBookmark();">북마크</a></li>
-				<li><a href="<%=contextPath%>/deleteMember.do">회원 탈퇴</a></li>
+				<li data-bs-toggle="modal" data-bs-target="#deleteMemberModal"><a
+					href="#">회원탈퇴</a></li>
 			</ul>
 		</div>
 
+
+		<!-- Modal -->
+		<div class="modal fade" id="deleteMemberModal" tabindex="-1"
+			aria-labelledby="deleteMemberModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="deleteMemberModalLabel">회원
+							탈퇴</h1>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">&times;</button>
+					</div>
+					<!-- 모달 바디 부분 -->
+					<div class="modal-body">
+						<form action="<%=contextPath%>/delete.do" method="post">
+							<input type="hidden" name="userId" value="${ loginUser.userId }">
+							<div class="mb-3">
+								<b>탈퇴 후 복구 불가능합니다. <br>그래도 탈퇴하시겠습니까?
+								</b>
+							</div>
+							<div class="mb-3">
+								<label for="message-text" class="col-form-label">비밀번호: </label>
+								<input type="password" class="form-control" id="deleteCheckPwd"
+									name="userPwd" required></input>
+							</div>
+
+							<br>
+
+							<button type="submit" class="btn btn-sm btn-info"
+								style="border-radius: 10px;">탈퇴하기</button>
+
+						</form>
+
+					</div>
+					<!-- 모달 푸터 부분 -->
+					<!-- <div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  <button type="button" class="btn btn-primary">Send message</button>
+			</div> -->
+				</div>
+			</div>
+		</div>
 		<!-- Main Content -->
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.H2.chuizone.member.controller;
+package com.H2.chuizone.mypage.controller;
 
 import java.io.IOException;
 
@@ -13,16 +13,16 @@ import com.H2.chuizone.member.model.service.MemberService;
 import com.H2.chuizone.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberLoginController
+ * Servlet implementation class UpdateMemberInfo
  */
-@WebServlet("/login.me")
-public class MemberLoginController extends HttpServlet {
+@WebServlet("/updateInfo.do")
+public class UpdateMemberInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLoginController() {
+    public UpdateMemberInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +31,34 @@ public class MemberLoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String userId = request.getParameter("userId");
-		String userPw = request.getParameter("userPw");
-		
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
 		Member m = new Member();
 		m.setUserId(userId);
-		m.setUserPw(userPw);
-		
-		Member loginUser = new MemberService().loginMember(m);
-		
-		if (loginUser != null) {
-			HttpSession session = request.getSession();
-			
+		m.setEmail(email);
+		m.setPhone(phone);
+		m.setAddress(address);
+		HttpSession session =request.getSession();
+		int result = new MemberService().updateMember(m);
+		if(result > 0) {
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			loginUser.setUserId(userId);
+			loginUser.setEmail(email);
+			loginUser.setPhone(phone);
+			loginUser.setAddress(address);
 			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect( request.getContextPath() );
+			session.setAttribute("alertMsg", "회원정보가 수정되었습니다.");
+			response.sendRedirect(request.getContextPath()+"/views/myPage/myInfo.jsp");
 		} else {
-			// 로그인 페이지로 다시 포워딩
-			request.getRequestDispatcher("views/member/loginForm.jsp").forward(request, response);
+			session.setAttribute("alertMsg", "회원정보 수정에 실패했습니다.");
+			response.sendRedirect(request.getContextPath()+"/views/myPage/myInfo.jsp");
 		}
 		
-		}
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

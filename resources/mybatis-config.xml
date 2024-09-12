@@ -5,8 +5,9 @@
 <configuration>
 
 	<settings>
-		<setting name="jdbcTypeForNull" value="NULL" />
-	</settings>
+      <setting name="jdbcTypeForNull" value="NULL" />
+       
+   </settings>
 	
 	<typeAliases>
 		<typeAlias type="com.H2.chuizone.member.model.vo.Member" alias="Member" />

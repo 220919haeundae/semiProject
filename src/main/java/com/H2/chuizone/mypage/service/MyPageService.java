@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.H2.chuizone.member.model.dao.MemberDao;
+import com.H2.chuizone.member.model.vo.Member;
 import com.H2.chuizone.mypage.model.dao.MyBookmarkDao;
 import com.H2.chuizone.mypage.model.dao.MyReplyDao;
 import com.H2.chuizone.mypage.model.dao.MySocialDao;
@@ -41,4 +43,6 @@ public class MyPageService {
 		sqlsession.close();
 		return mbList;
 	}
+
+	
 }

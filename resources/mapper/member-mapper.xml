@@ -20,7 +20,7 @@
   	WHERE MID = #{userId} AND MPW = #{userPw}
   </select>
   
-  <select id="idCheck" resultType="_int">
+  <select id="idCheck" resultType="_int" >
 	SELECT COUNT(*) COUNT
 	FROM Member
 	WHERE MID = #{userId}
@@ -37,5 +37,17 @@
   				#{phone}
   				)
   </insert>
+  
+  <delete id="deleteMember" parameterType="Member">
+  	DELETE 
+  	FROM MEMBER
+  	WHERE MPW = #{userPw} AND MID = #{userId}
+  </delete>
+  
+  <update id="updateMember" parameterType="Member">
+	UPDATE MEMBER
+	SET MID = #{userId}, MEMAIL = #{email}, MPHONE = #{phone}, MADDRESS = #{address}
+	WHERE MID = #{userId}
+  </update>
   
 </mapper>

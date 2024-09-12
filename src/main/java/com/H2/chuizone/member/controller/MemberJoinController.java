@@ -40,7 +40,7 @@ public class MemberJoinController extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		
-		Member m = new Member(userId, userPw, nickName, address, phone, email);
+		Member m = new Member(userId, userPw, nickName, email, address, phone);
 		
 		int result = new MemberService().joinMember(m);
 		
