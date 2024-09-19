@@ -11,22 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.H2.chuizone.member.model.vo.Member;
-import com.H2.chuizone.mypage.model.vo.MyBookmark;
+import com.H2.chuizone.mypage.model.vo.MyReply;
 import com.H2.chuizone.mypage.service.MyPageService;
 import com.H2.chuizone.template.PageInfo;
 import com.H2.chuizone.template.Pagination;
 
 /**
- * Servlet implementation class MyBookmark
+ * Servlet implementation class MyCommentController
  */
-@WebServlet("/toMyBookmark.do")
-public class MyBookmarkController extends HttpServlet {
+@WebServlet("/toMyReply.do")
+public class MyReplyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyBookmarkController() {
+    public MyReplyController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,20 +35,23 @@ public class MyBookmarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cpage = 1;
 		HttpSession session = request.getSession();
+		int cpage = 1;
 		if(request.getParameter("cpage") != null) {
 			cpage = Integer.parseInt(request.getParameter("cpage"));
 		}
 		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo() + "";
-		int myBookmarkCount = new MyPageService().selectMyBookmarkCount(userNo); // 북마크 수
-		PageInfo pi = Pagination.getPageInfo(myBookmarkCount, cpage, 5, 16);
-		ArrayList<MyBookmark> myBookmarkList = new MyPageService().selectMyBookmark(pi, userNo);
+		int myReplyCount = new MyPageService().selectMyReplyCount(userNo);
+		PageInfo pi;
 		
-		request.setAttribute("myBookmarkList", myBookmarkList);
+		pi = Pagination.getPageInfo(myReplyCount, cpage, 5, 16);
+		
+		ArrayList<MyReply> myReplyList = new MyPageService().selectMyReply(pi, userNo);
+		
+		request.setAttribute("myReplyList", myReplyList);
 		request.setAttribute("pi", pi);
 		
-		request.getRequestDispatcher("views/myPage/myBookmark.jsp").forward(request, response);
+		request.getRequestDispatcher("views/myPage/myReply.jsp").forward(request, response);
 	}
 
 	/**

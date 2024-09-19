@@ -43,7 +43,7 @@ public class MemberDao {
 
 	public int deleteMember(SqlSession sqlSession, Member m) {
 		
-		return sqlSession.delete("memberMapper.deleteMember", m);
+		return sqlSession.update("memberMapper.deleteMember", m);
 	}
 
 	public int updateMember(SqlSession sqlSession, Member m) {

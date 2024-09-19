@@ -1,6 +1,5 @@
 package com.H2.chuizone.mypage.model.vo;
 
-import java.sql.Blob;
 
 public class CategoryBoard {
 	private int cbNo;		// 카테고리 게시글 번호

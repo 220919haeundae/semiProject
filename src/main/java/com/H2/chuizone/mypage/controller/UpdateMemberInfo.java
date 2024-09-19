@@ -51,10 +51,10 @@ public class UpdateMemberInfo extends HttpServlet {
 			loginUser.setAddress(address);
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "회원정보가 수정되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/views/myPage/myInfo.jsp");
+			request.getRequestDispatcher("views/myPage/myInfo.jsp").forward(request, response);
 		} else {
 			session.setAttribute("alertMsg", "회원정보 수정에 실패했습니다.");
-			response.sendRedirect(request.getContextPath()+"/views/myPage/myInfo.jsp");
+			request.getRequestDispatcher("views/myPage/myInfo.jsp").forward(request, response);
 		}
 		
 		

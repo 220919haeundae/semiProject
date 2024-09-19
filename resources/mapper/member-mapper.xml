@@ -34,14 +34,15 @@
   				#{nickName},
   				#{email},
   				#{address},
-  				#{phone}
+  				#{phone},
+  				default
   				)
   </insert>
   
   <delete id="deleteMember" parameterType="Member">
-  	DELETE 
-  	FROM MEMBER
-  	WHERE MPW = #{userPw} AND MID = #{userId}
+  	UPDATE MEMBER
+  	SET STATUS = 'N'
+  	WHERE MID = #{userId} AND MPW = #{userPw}
   </delete>
   
   <update id="updateMember" parameterType="Member">

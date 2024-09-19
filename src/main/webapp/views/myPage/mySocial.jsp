@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,54 +17,40 @@
     <jsp:include page="myPageNav.jsp"></jsp:include>
         <div class="content">
             <div class="group-list">
-                
+            <c:forEach var="mySocial" items="${ mySocialList }">
+                <a href="list?boardNo=${mySocial.boardNo }">
+                	<div class="group-item">
+	                	<img src = "${mySocial.img }">
+	                	<div class="group-info">
+	                		<h3>
+	                			${ mySocial.title }
+	                		</h3>
+	                		<p>
+	                			${ mySocial.description }
+	                		</p>
+	                	</div>
+                	</div>
+                </a>
+            </c:forEach>
             </div>
+            
+            <c:if test="${pi.maxPage>1 }">
+            <ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="toMySocial.do?cpage=${ pi.currentPage-1 }">Previous</a></li>
+				<c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<li class="page-item"><a class="page-link" href="toMySocial.do?cpage=${ i }">${ i }</a></li>
+				</c:forEach>
+				<li class="page-item"><a class="page-link" href="toMySocial.do?cpage=${ pi.currentPage+1 }">Next</a></li>
+			</ul>
+			</c:if>
         </div>
+	    
     </div>
 
+	
     <!-- Footer -->
     <jsp:include page="../common/footer.jsp"></jsp:include>
     
-    <script>
-    	$.ajax({
-    		url: '/hobbyharvest/mySocial.do',
-    		type: 'post',
-    		data: {data: ${userInfo.userNo}},
-    		dataType: 'json',
-    		success: function(result) {
-    			let mySocialList = result;
-    			console.log(mySocialList);
-    			for(let mySocial of mySocialList) {
-    				const a = document.createElement("a");
-    				const divGroupItem = document.createElement("div");
-    				const img = document.createElement("img");
-    				const divGroupInfo = document.createElement("div");
-    				const h3 = document.createElement("h3");
-    				const p = document.createElement("p");
-    				
-    				a.href= "<%request.getContextPath();%>/서블릿?boardNo="+mySocial.boardNo;
-    				divGroupItem.className = "group-item";
-    				img.src = "D://upload" + mySocial.img;
-    				img.alt = "Group Image";
-    				divGroupInfo.className = "group-info";
-    				h3.textContent = mySocial.title;
-    				p.textContent = mySocial.description;
-    				
-    				divGroupItem.appendChild(img);
-    				divGroupItem.appendChild(divGroupInfo);
-    				divGroupInfo.appendChild(h3);
-    				divGroupInfo.appendChild(p);
-    				a.appendChild(divGroupItem);
-    				
-    				document.getElementsByClassName("group-list")[0].appendChild(a);
-    			}
-    			
-    			
-    		},
-    		error: function(error) {
-    			alert('서버 통신 실패');
-    		}
-    	});
-    </script>
+    
 </body>
 </html>

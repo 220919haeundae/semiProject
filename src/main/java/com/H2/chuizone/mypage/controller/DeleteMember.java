@@ -45,10 +45,10 @@ public class DeleteMember extends HttpServlet {
 		if(result > 0) {
 			request.getSession().removeAttribute("loginUser");
 			request.getSession().setAttribute("alertMsg", "회원탈퇴 성공했습니다.");
-			response.sendRedirect("/hobbyharvest/views/main.jsp");	
+			request.getRequestDispatcher("views/main.jsp").forward(request, response);
 		} else {
 			request.getSession().setAttribute("alertMsg", "회원탈퇴 실패했습니다.");
-			response.sendRedirect( "/views/myPage/myInfo.jsp");
+			request.getRequestDispatcher("views/myPage/myInfo.jsp").forward(request, response);
 		}
 		
 	}

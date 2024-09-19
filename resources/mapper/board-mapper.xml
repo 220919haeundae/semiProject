@@ -4,21 +4,34 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapper">
 
-
+	<!-- 내 모임 게시판 리스트 조회 -->
 	<resultMap id="mySocialSet" type="MySocial">
 		<result column="btitle" property="title" />
 		<result column="bcontent" property="description" />
 		<result column="bno" property="boardNo" />
 		<result column="cbimg" property="img" />
 	</resultMap>
-	<select id="mySocial" resultMap="mySocialSet">
-		SELECT A.BTITLE, A.BCONTENT, A.BNO, C.CBIMG
+	<select id="selectMySocial" resultMap="mySocialSet">
+		SELECT A.BTITLE btitle, A.BCONTENT bcontent, A.BNO bno, C.CBIMG cbimg
 		FROM BOARD A
-			JOIN KINDOFBOARD B ON (A.KBNO = B.KBNO)
-			JOIN CATEGORYBOARD C ON (B.KBNO = C.KBNO)
-		WHERE A.MNO = #{memberNo}
+		JOIN KINDOFBOARD B ON (A.KBNO = B.KBNO)
+		JOIN CATEGORYBOARD C ON (B.KBNO = C.KBNO)
+		WHERE A.MNO = #{userNo}
 	</select>
+	<select id="selectMySocialCount" resultType="_int">
+		SELECT COUNT(*)
+		COUNT
+		FROM BOARD
+		WHERE MNO = #{userNo}
+	</select>
+	<!-- ************************************************************ -->
 
+
+	<select id="selectMyReplyCount" resultType="_int">
+		SELECT COUNT(*) COUNT
+		FROM REPLY
+		WHERE MNO = #{userNo}
+	</select>
 
 	<resultMap id="myReplySet" type="MyReply">
 		<result column="btitle" property="title" />
@@ -27,14 +40,17 @@
 		<result column="cbimg" property="img" />
 	</resultMap>
 	<select id="myReply" resultMap="myReplySet">
-		SELECT B.BTITLE, A.RCONTENT, A.BNO, D.CBIMG
+		SELECT B.BTITLE, A.RCONTENT,
+		A.BNO, D.CBIMG
 		FROM REPLY A
-			JOIN BOARD B ON (A.BNO = B.BNO)
-			JOIN KINDOFBOARD C ON (B.KBNO = B.KBNO)
-			JOIN CATEGORYBOARD D ON (C.KBNO=D.KBNO)
-		WHERE A.MNO = #{memberNo}
+		JOIN BOARD B ON (A.BNO = B.BNO)
+		JOIN KINDOFBOARD C ON (B.KBNO = B.KBNO)
+		JOIN CATEGORYBOARD D ON (C.KBNO=D.KBNO)
+		WHERE A.MNO = #{userNo}
 	</select>
-	
+
+
+
 	<resultMap id="myBookmarkSet" type="MyBookmark">
 		<result column="bno" property="boardNo" />
 		<result column="btitle" property="title" />
@@ -44,11 +60,28 @@
 	<select id="MyBookmark" resultMap="myBookmarkSet">
 		SELECT A.BNO, A.BTITLE, A.BCONTENT, C.CBIMG
 		FROM BOARD A
-    		JOIN KINDOFBOARD B ON (A.KBNO = B.KBNO)
-    		JOIN CATEGORYBOARD C ON (B.KBNO = C.KBNO)
-    		JOIN BOOKCATEGORY D ON (C.CBNO = D.CBNO)
-    		JOIN BOOKMARK E ON (D.BNO = E.BNO)
-		WHERE E.MNO = #{memberNo}
+			JOIN KINDOFBOARD B ON (A.KBNO = B.KBNO)
+			JOIN CATEGORYBOARD C ON (B.KBNO = C.KBNO)
+			JOIN BOOKCATEGORY D ON (C.CBNO = D.CBNO)
+			JOIN BOOKMARK E ON (D.BNO = E.BNO)
+		WHERE E.MNO = #{userrNo}
 	</select>
 	
+	<select id="selectMyBookmarkCount" resultType="_int">
+		SELECT COUNT(*) COUNT
+		FROM BOOKMARK
+		WHERE MNO = #{userNo}
+	</select>
+	
+
+
+	<!-- 1:1 문의 게시글 삽입 -->
+	<insert id="insertInquiryBoard">
+		INSERT INTO BOARD(BNO, MNO, KBNO, BTITLE, BDATE,
+		BCONTENT, ORGFILENAME, CHGFILENAME)
+		VALUES(SEQ_BNO.NEXTVAL, #{userNo},
+		10, #{boardTitle}, SYSDATE, #{boardContent}, #{originFileNames},
+		#{changeFileNames})
+	</insert>
+	<!-- ***************************************************************** -->
 </mapper>

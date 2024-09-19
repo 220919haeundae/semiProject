@@ -12,37 +12,44 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    
 </head>
     <jsp:include page="myPageNav.jsp"></jsp:include>
-        <div class="content">
-            <div class="bookmark-list">
-            	<c:forEach var="myBookmark" items="${ myBookmarkList }">
-            	<a href="list?boardNo=${ myBookmark.boardNo }">
-	                <div class="bookmark-item">
-	                    <img src="img/Icon.jpg" alt="" class="bookmark-icon">
-	                    <img src="img/group1.png" alt="Group Image">
-	                    <div class="bookmark-info">
-	                        <h3>${ myBookmark.title }</h3>
-	                        <p>${ myBookmark.description }</p>
-	                    </div>
-	                </div>
-                </a>
-                </c:forEach>
+    <div class="content">
+        <div class="comment-list">
+        
+        	<c:forEach var="myReply" items="${ myReplyList }">
+        	<a href="list?boardNo=${myReply.boardNo }">
+            <div class="comment-item">
+                <img src="#" alt="Group Image">
+                <div class="comment-info">
+                    <h3>${ myReply.title }</h3>
+                    <h5>작성일</h5>
+                    <p>${ myReply.reply }</p>
+                </div>
             </div>
-            <c:if test="${pi.maxPage>1 }">
+            </a>
+            </c:forEach>
+        </div>
+        <c:if test="${pi.maxPage>1 }">
             <ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="toMyBookmark.do?cpage=${ pi.currentPage-1 }">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="toMyReply.do?cpage=${ pi.currentPage-1 }">Previous</a></li>
 				<c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage }">
-				<li class="page-item"><a class="page-link" href="toMyBookmark.do?cpage=${ i }">${ i }</a></li>
+				<li class="page-item"><a class="page-link" href="toMyReply.do?cpage=${ i }">${ i }</a></li>
 				</c:forEach>
-				<li class="page-item"><a class="page-link" href="toMyBookmark.do?cpage=${ pi.currentPage+1 }">Next</a></li>
+				<li class="page-item"><a class="page-link" href="toMyReply.do?cpage=${ pi.currentPage+1 }">Next</a></li>
 			</ul>
 		</c:if>
-        </div>
     </div>
+</div>
     <!-- Footer -->
     <jsp:include page="../common/footer.jsp"></jsp:include>
     
     
 </body>
 </html>
+
+            
+
+
+    <!-- Footer -->
