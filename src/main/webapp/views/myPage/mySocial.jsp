@@ -8,17 +8,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hobby Harvest</title>
-    <link rel="stylesheet" href="http://localhost:8080/hobbyharvest/views/css/myPage.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    
 </head>
     <jsp:include page="myPageNav.jsp"></jsp:include>
         <div class="content">
             <div class="group-list">
             <c:forEach var="mySocial" items="${ mySocialList }">
-                <a href="list?boardNo=${mySocial.boardNo }">
+                <a href="showBoard.me?board_id=${mySocial.boardNo }">
                 	<div class="group-item">
 	                	<img src = "${mySocial.img }">
 	                	<div class="group-info">

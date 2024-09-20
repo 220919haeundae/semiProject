@@ -1,4 +1,4 @@
-package com.H2.chuizone.template;
+package com.h2.chuizone.template;
 
 import java.io.IOException;
 import java.io.InputStream;

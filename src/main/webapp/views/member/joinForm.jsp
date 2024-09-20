@@ -54,7 +54,7 @@
     }
 
     .container * {
-        margin: 10px 0; /* 요소 간격 조정 */
+        margin: 5px 0; /* 요소 간격 조정 */
     }
 
     table {
@@ -122,7 +122,7 @@
 						<input id="input-id" type="text" name="userId" required>
 					</td>
 					<td>
-                        <button class="btn-confirm" onclick="idCheck();">중복검사</button>
+                        <button type="button" class="btn-confirm" onclick="idCheck();">중복검사</button>
 					</td>
                 </tr>
 
@@ -156,34 +156,23 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input class="input-items" type="text" name="address">
+                        <input class="input-items" type="text" name="address" required>
                     </td>
                 </tr>
 				<tr>
 					<td>전화번호</td>
                 </tr>
                 <tr>
-					<td>
-                        <input class="input-items" type="tel" id="input-phone" name="phone">          
+					<td colspan="2">
+                        <input class="input-items" type="tel" id="input-phone" name="phone" required>        
 					</td>
-                    <td>
-                        <button id="btn-phone" >인증하기</button>  
-                    </td>
 				</tr>
-                <tr>
-                    <td>
-						<input type="text">
-					</td>
-					<td>
-                        <button class="btn-confirm">인증 확인</button>
-					</td>
-                </tr>
 				<tr>
 					<td>이메일</td>
                 </tr>
                 <tr>
 					<td colspan="2">
-                        <input class="input-items" type="email" name="email">
+                        <input class="input-items" type="email" name="email" required>
 					</td>
 				</tr>
 			</table>

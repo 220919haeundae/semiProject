@@ -1,10 +1,10 @@
-package com.H2.chuizone.customerServicePage.model.service;
+package com.h2.chuizone.customerServicePage.model.service;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.H2.chuizone.customerServicePage.model.dao.CustomerServiceDao;
-import com.H2.chuizone.customerServicePage.model.vo.Board;
-import com.H2.chuizone.template.MybatisTemplate;
+import com.h2.chuizone.customerServicePage.model.dao.CustomerServiceDao;
+import com.h2.chuizone.customerServicePage.model.vo.Board;
+import com.h2.chuizone.template.MybatisTemplate;
 
 public class CustomerService {
 

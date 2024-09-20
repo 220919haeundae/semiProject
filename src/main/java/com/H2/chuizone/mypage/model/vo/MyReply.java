@@ -1,4 +1,4 @@
-package com.H2.chuizone.mypage.model.vo;
+package com.h2.chuizone.mypage.model.vo;
 
 public class MyReply {
 	private String title;

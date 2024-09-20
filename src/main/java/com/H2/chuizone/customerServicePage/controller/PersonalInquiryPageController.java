@@ -1,4 +1,4 @@
-package com.H2.chuizone.customerServicePage.controller;
+package com.h2.chuizone.customerServicePage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

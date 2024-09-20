@@ -1,4 +1,4 @@
-package com.H2.chuizone.member.model.vo;
+package com.h2.chuizone.member.model.vo;
 
 public class Member {
 	

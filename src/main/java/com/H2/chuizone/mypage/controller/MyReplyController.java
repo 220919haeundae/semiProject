@@ -1,4 +1,4 @@
-package com.H2.chuizone.mypage.controller;
+package com.h2.chuizone.mypage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.H2.chuizone.member.model.vo.Member;
-import com.H2.chuizone.mypage.model.vo.MyReply;
-import com.H2.chuizone.mypage.service.MyPageService;
-import com.H2.chuizone.template.PageInfo;
-import com.H2.chuizone.template.Pagination;
+import com.h2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.mypage.model.vo.MyReply;
+import com.h2.chuizone.mypage.model.vo.MySocial;
+import com.h2.chuizone.mypage.service.MyPageService;
+import com.h2.chuizone.template.PageInfo;
+import com.h2.chuizone.template.Pagination;
 
 /**
  * Servlet implementation class MyCommentController
@@ -47,6 +48,17 @@ public class MyReplyController extends HttpServlet {
 		pi = Pagination.getPageInfo(myReplyCount, cpage, 5, 16);
 		
 		ArrayList<MyReply> myReplyList = new MyPageService().selectMyReply(pi, userNo);
+		
+		
+		for(MyReply mr : myReplyList) {
+			if(mr.getReply().length() > 10 ) {
+				mr.setReply(mr.getReply().substring(0, 10)+ "..." );
+			}
+			if(mr.getTitle().length() > 5 ) {
+				mr.setTitle(mr.getTitle().substring(0, 5)+ "..." );
+			}
+		}
+		
 		
 		request.setAttribute("myReplyList", myReplyList);
 		request.setAttribute("pi", pi);

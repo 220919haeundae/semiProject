@@ -1,4 +1,4 @@
-package com.H2.chuizone.mypage.controller;
+package com.h2.chuizone.mypage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.H2.chuizone.member.model.vo.Member;
-import com.H2.chuizone.mypage.model.vo.MyBookmark;
-import com.H2.chuizone.mypage.service.MyPageService;
-import com.H2.chuizone.template.PageInfo;
-import com.H2.chuizone.template.Pagination;
+import com.h2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.mypage.model.vo.MyBookmark;
+import com.h2.chuizone.mypage.model.vo.MySocial;
+import com.h2.chuizone.mypage.service.MyPageService;
+import com.h2.chuizone.template.PageInfo;
+import com.h2.chuizone.template.Pagination;
 
 /**
  * Servlet implementation class MyBookmark
@@ -44,6 +45,15 @@ public class MyBookmarkController extends HttpServlet {
 		int myBookmarkCount = new MyPageService().selectMyBookmarkCount(userNo); // 북마크 수
 		PageInfo pi = Pagination.getPageInfo(myBookmarkCount, cpage, 5, 16);
 		ArrayList<MyBookmark> myBookmarkList = new MyPageService().selectMyBookmark(pi, userNo);
+		
+		for(MyBookmark mb : myBookmarkList) {
+			if(mb.getDescription().length() > 10 ) {
+				mb.setDescription(mb.getDescription().substring(0, 10)+ "..." );
+			}
+			if(mb.getTitle().length() > 5 ) {
+				mb.setTitle(mb.getTitle().substring(0, 5)+ "..." );
+			}
+		}
 		
 		request.setAttribute("myBookmarkList", myBookmarkList);
 		request.setAttribute("pi", pi);

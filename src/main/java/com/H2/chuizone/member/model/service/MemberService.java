@@ -1,10 +1,10 @@
-package com.H2.chuizone.member.model.service;
+package com.h2.chuizone.member.model.service;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.H2.chuizone.member.model.dao.MemberDao;
-import com.H2.chuizone.member.model.vo.Member;
-import com.H2.chuizone.template.MybatisTemplate;
+import com.h2.chuizone.member.model.dao.MemberDao;
+import com.h2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.template.MybatisTemplate;
 
 public class MemberService {
 	
@@ -60,6 +60,7 @@ public class MemberService {
 		
 		return result;
 	}
+	
 	
 	public int deleteMember(Member m) {
 		int result = 0;

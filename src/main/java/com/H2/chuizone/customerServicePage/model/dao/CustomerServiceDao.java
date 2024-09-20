@@ -1,8 +1,8 @@
-package com.H2.chuizone.customerServicePage.model.dao;
+package com.h2.chuizone.customerServicePage.model.dao;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.H2.chuizone.customerServicePage.model.vo.Board;
+import com.h2.chuizone.customerServicePage.model.vo.Board;
 
 public class CustomerServiceDao {
 

@@ -76,8 +76,22 @@
 
 </style>
 </head>
+
+
+
 <body>
-<% String contextPath = request.getContextPath(); %>
+<%
+	String contextPath = request.getContextPath();
+
+	String alertMsg = (String)session.getAttribute("alertMsg");
+%>
+
+    <% if (alertMsg != null) { %>
+        <script>
+            alert("<%= alertMsg %>");
+        </script>
+        <% session.removeAttribute("alertMsg"); %>
+    <% } %>
     <div class="container">
         <div class="login-form-area">
             <form id="login-form" action="<%= contextPath %>/login.me" method="post">

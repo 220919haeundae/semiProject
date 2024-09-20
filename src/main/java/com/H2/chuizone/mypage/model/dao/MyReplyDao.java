@@ -1,12 +1,12 @@
-package com.H2.chuizone.mypage.model.dao;
+package com.h2.chuizone.mypage.model.dao;
 
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
-import com.H2.chuizone.mypage.model.vo.MyReply;
-import com.H2.chuizone.template.PageInfo;
+import com.h2.chuizone.mypage.model.vo.MyReply;
+import com.h2.chuizone.template.PageInfo;
 
 public class MyReplyDao {
 
@@ -23,7 +23,4 @@ public class MyReplyDao {
 		
 		return (ArrayList)sqlSession.selectList("boardMapper.myReply", userNo, rowBounds);
 	}
-
-	
-	
 }

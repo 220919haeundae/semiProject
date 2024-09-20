@@ -1,4 +1,4 @@
-package com.H2.chuizone.customerServicePage.controller;
+package com.h2.chuizone.customerServicePage.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.H2.chuizone.customerServicePage.model.service.CustomerService;
-import com.H2.chuizone.customerServicePage.model.vo.Board;
+import com.h2.chuizone.customerServicePage.model.service.CustomerService;
+import com.h2.chuizone.customerServicePage.model.vo.Board;
 
 /**
  * Servlet implementation class inquiryWriteController
@@ -25,13 +25,13 @@ import com.H2.chuizone.customerServicePage.model.vo.Board;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024 * 50 * 5)
 @WebServlet("/inquiry.do")
-public class inquiryWriteController extends HttpServlet {
+public class InquiryWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public inquiryWriteController() {
+	public InquiryWriteController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -54,9 +54,14 @@ public class inquiryWriteController extends HttpServlet {
 		int i = 0;
 		int result;
 
+		
 		for (Part part : parts) {
+			// 사용자로부터 요청을 모두 Part타입으로 받기 때문에(첨부파일인지 아닌지 상관없이)
+			// 객체에서 name을 추출해서 upfile(첨부파일 input의 name)이 아닐 경우 continue;
 			if (!part.getName().equals("upfile"))
 				continue;
+			// 2차로 upfile의 value일 때 제출된 파일명을 확인하여 ""(첨부파일이 없을 시 빈 문자열로 옴)
+			// 가 아닐 경우 첨부파일 처리절차 실행
 			if(!part.getSubmittedFileName().isEmpty()) {
 				
 				int num;
@@ -87,7 +92,7 @@ public class inquiryWriteController extends HttpServlet {
 				if(!originFileName.isEmpty() && !changeFileName.isEmpty() ) {
 					originFileNames.append(originFileName);
 					originFileNames.append(",");
-					changeFileNames.append(changeFileName);
+					changeFileNames.append(path + changeFileName); // 저장된 물리경로 + 변환된 첨부파일명
 					changeFileNames.append(",");
 				}
 				

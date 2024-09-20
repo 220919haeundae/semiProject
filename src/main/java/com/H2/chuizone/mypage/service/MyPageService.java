@@ -1,22 +1,21 @@
-package com.H2.chuizone.mypage.service;
+package com.h2.chuizone.mypage.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.H2.chuizone.customerServicePage.model.vo.Board;
-import com.H2.chuizone.member.model.dao.MemberDao;
-import com.H2.chuizone.member.model.vo.Member;
-import com.H2.chuizone.mypage.model.dao.MyBookmarkDao;
-import com.H2.chuizone.mypage.model.dao.MyReplyDao;
-import com.H2.chuizone.mypage.model.dao.MySocialDao;
-import com.H2.chuizone.mypage.model.vo.MyBookmark;
-import com.H2.chuizone.mypage.model.vo.MyReply;
-import com.H2.chuizone.mypage.model.vo.MySocial;
-import com.H2.chuizone.template.MybatisTemplate;
-import com.H2.chuizone.template.PageInfo;
-
+import com.h2.chuizone.customerServicePage.model.vo.Board;
+import com.h2.chuizone.member.model.dao.MemberDao;
+import com.h2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.mypage.model.dao.MyBookmarkDao;
+import com.h2.chuizone.mypage.model.dao.MyReplyDao;
+import com.h2.chuizone.mypage.model.dao.MySocialDao;
+import com.h2.chuizone.mypage.model.vo.MyBookmark;
+import com.h2.chuizone.mypage.model.vo.MyReply;
+import com.h2.chuizone.mypage.model.vo.MySocial;
+import com.h2.chuizone.template.MybatisTemplate;
+import com.h2.chuizone.template.PageInfo;
 
 public class MyPageService {
 	SqlSession sqlSession;

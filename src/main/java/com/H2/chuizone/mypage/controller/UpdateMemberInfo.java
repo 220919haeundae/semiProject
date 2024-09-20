@@ -1,4 +1,4 @@
-package com.H2.chuizone.mypage.controller;
+package com.h2.chuizone.mypage.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.H2.chuizone.member.model.service.MemberService;
-import com.H2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.member.model.service.MemberService;
+import com.h2.chuizone.member.model.vo.Member;
 
 /**
  * Servlet implementation class UpdateMemberInfo

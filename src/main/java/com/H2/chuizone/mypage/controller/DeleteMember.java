@@ -1,4 +1,4 @@
-package com.H2.chuizone.mypage.controller;
+package com.h2.chuizone.mypage.controller;
 
 import java.io.IOException;
 
@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.H2.chuizone.member.model.service.MemberService;
-import com.H2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.mypage.model.vo.MyBookmark;
+import com.h2.chuizone.mypage.service.MyPageService;
+import com.google.gson.Gson;
+import com.h2.chuizone.member.model.service.MemberService;
+import com.h2.chuizone.member.model.vo.Member;
 
 /**
  * Servlet implementation class DeleteMember
@@ -45,7 +48,7 @@ public class DeleteMember extends HttpServlet {
 		if(result > 0) {
 			request.getSession().removeAttribute("loginUser");
 			request.getSession().setAttribute("alertMsg", "회원탈퇴 성공했습니다.");
-			request.getRequestDispatcher("views/main.jsp").forward(request, response);
+			response.sendRedirect("views/main.jsp");
 		} else {
 			request.getSession().setAttribute("alertMsg", "회원탈퇴 실패했습니다.");
 			request.getRequestDispatcher("views/myPage/myInfo.jsp").forward(request, response);

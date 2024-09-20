@@ -13,7 +13,7 @@
     <!-- 부트스트랩 스크립트 코드 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-     
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script> -->
     
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -38,7 +38,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            padding: 5px;
+            padding: 0;
             width: 100%;
             min-width: 1200px;
             height: 82px;
@@ -50,13 +50,22 @@
             flex: left;
             width: 15%;
         }
+        #img-area img {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            width: 250px;
+            height: 80px;
+        }
 
         .nav-area {
         /* border: red solid 1px; */
         width: 60%;
         display: flex;
         justify-content: space-evenly;
-
+        align-items: center;
         }
         
         .menu {
@@ -153,7 +162,7 @@
 
         .dropdown button {
             /* border: red solid 1px; */
-            width: 120px;
+            width: 100px;
             border-radius: 15px;
         }
 
@@ -169,7 +178,7 @@
 
 <%
 	String contextPath = request.getContextPath();
-	
+
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 
@@ -182,10 +191,12 @@
 
     <div class="header">
         <!-- 카테고리 영역 -->
-        <div id="img-area">img</div>
+        <div id="img-area">
+            <img src="views/common/img/logo.png" alt="로고 이미지">
+        </div>
         <div class="nav-area" align="center">
             <div class="menu"><a href="<%= contextPath %>">HOME</a></div>
-            <div class="menu"><a href="#">카테고리</a></div>
+            <div class="menu"><a href="<%= contextPath %>/category.me">카테고리</a></div>
             <div class="menu"><a href="#">공지사항</a></div>
             <div class="menu"><a href="<%= contextPath %>/toFaqPage.do">고객센터</a></div>
         </div>

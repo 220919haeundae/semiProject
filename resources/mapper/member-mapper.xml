@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
-
   <resultMap id="memberResultSet" type="Member">
 	<result column="mno" property="userNo" />
 	<result column="mid" property="userId" />
@@ -16,18 +15,18 @@
   
   <select id="loginMember" resultMap="memberResultSet">
   	SELECT *
-  	FROM Member
-  	WHERE MID = #{userId} AND MPW = #{userPw}
+  	FROM MEMBER
+  	WHERE MID = #{userId} AND MPW = #{userPw} AND STATUS = 'Y'
   </select>
   
-  <select id="idCheck" resultType="_int" >
+  <select id="idCheck" resultType="_int">
 	SELECT COUNT(*) COUNT
-	FROM Member
+	FROM MEMBER
 	WHERE MID = #{userId}
   </select>
   
   <insert id="joinMember" parameterType="Member">
-  	INSERT INTO Member
+  	INSERT INTO MEMBER
   		VALUES (SEQ_MNO.NEXTVAL,
   				#{userId},
   				#{userPw},
@@ -35,10 +34,9 @@
   				#{email},
   				#{address},
   				#{phone},
-  				default
-  				)
+  				DEFAULT)
   </insert>
-  
+
   <delete id="deleteMember" parameterType="Member">
   	UPDATE MEMBER
   	SET STATUS = 'N'
@@ -50,5 +48,4 @@
 	SET MID = #{userId}, MEMAIL = #{email}, MPHONE = #{phone}, MADDRESS = #{address}
 	WHERE MID = #{userId}
   </update>
-  
 </mapper>

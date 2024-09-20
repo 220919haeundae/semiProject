@@ -1,4 +1,4 @@
-package com.H2.chuizone.member.controller;
+package com.h2.chuizone.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

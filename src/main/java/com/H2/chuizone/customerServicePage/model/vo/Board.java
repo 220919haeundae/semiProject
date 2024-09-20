@@ -1,4 +1,4 @@
-package com.H2.chuizone.customerServicePage.model.vo;
+package com.h2.chuizone.customerServicePage.model.vo;
 
 public class Board {
 	private String boardNo;

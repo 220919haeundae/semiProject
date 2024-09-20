@@ -29,14 +29,14 @@
 			color: #4c4242;
 	    }
 	
-	    table {
+	    .footer table {
 	        /* border: red solid 2px; */
 	        font-size: 14px;
 	        width: 60%;
 	        margin-left: 10%;
 	    }
 	
-	    tr, td {
+	    .footer tr, td {
 	        /* border: blue solid 1px; */
 	        padding: 10px;
 	    }

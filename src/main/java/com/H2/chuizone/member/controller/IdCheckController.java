@@ -1,4 +1,4 @@
-package com.H2.chuizone.member.controller;
+package com.h2.chuizone.member.controller;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.H2.chuizone.member.model.service.MemberService;
+import com.h2.chuizone.member.model.service.MemberService;
 
 /**
  * Servlet implementation class IdCheckController

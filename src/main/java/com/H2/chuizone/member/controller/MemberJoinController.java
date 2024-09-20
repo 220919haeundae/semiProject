@@ -1,4 +1,4 @@
-package com.H2.chuizone.member.controller;
+package com.h2.chuizone.member.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.H2.chuizone.member.model.service.MemberService;
-import com.H2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.member.model.service.MemberService;
+import com.h2.chuizone.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberJoinController
@@ -36,9 +36,9 @@ public class MemberJoinController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
 		String nickName = request.getParameter("nickName");
+		String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
 		
 		Member m = new Member(userId, userPw, nickName, email, address, phone);
 		

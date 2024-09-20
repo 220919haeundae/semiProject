@@ -1,4 +1,4 @@
-package com.H2.chuizone.mypage.controller;
+package com.h2.chuizone.mypage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.H2.chuizone.member.model.vo.Member;
-import com.H2.chuizone.mypage.model.vo.MySocial;
-import com.H2.chuizone.mypage.service.MyPageService;
-import com.H2.chuizone.template.PageInfo;
-import com.H2.chuizone.template.Pagination;
+import com.h2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.mypage.model.vo.MySocial;
+import com.h2.chuizone.mypage.service.MyPageService;
+import com.h2.chuizone.template.PageInfo;
+import com.h2.chuizone.template.Pagination;
 
 /**
  * Servlet implementation class MySocialController
@@ -48,19 +48,15 @@ public class MySocialController extends HttpServlet {
 		
 		ArrayList<MySocial> mySocialList = new MyPageService().selectMySocialList(pi, userNo);
 		
+		
+		
 		for(MySocial ms : mySocialList) {
 			if(ms.getDescription().length() > 10 ) {
 				ms.setDescription(ms.getDescription().substring(0, 10)+ "..." );
-			} else {
-				ms.setDescription(ms.getDescription().substring(0, ms.getDescription().length()));
 			}
-			
 			if(ms.getTitle().length() > 5 ) {
 				ms.setTitle(ms.getTitle().substring(0, 5)+ "..." );
-			} else {
-				ms.setTitle(ms.getTitle().substring(0, ms.getTitle().length()));
 			}
-			 
 		}
 		
 		request.setAttribute("mySocialList", mySocialList);
