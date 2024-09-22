@@ -93,7 +93,7 @@ public class ClubUnjoinController extends HttpServlet {
 
 			MemberClubService memberClubService = new MemberClubServiceImpl();
 			result = memberClubService.deleteJoinClub(new MemberClub(0, member.getUserNo(), selectCategoryBoardListDto.getClubNo()));
-			
+			System.out.println(selectCategoryBoardListDto);
 			if(result > 0) {
 				CategoryBoardService categroBoardService = new CategoryBoardServiceImpl();
 				resultCategory = categroBoardService.updateCategoryBoardByCurCount(selectCategoryBoardListDto.getCurrentCount() - 1, boardNo);

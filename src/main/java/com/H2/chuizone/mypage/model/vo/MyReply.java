@@ -5,15 +5,17 @@ public class MyReply {
 	private String reply;
 	private String boardNo;
 	private String img;
+	private String createDate;
 	
 	public MyReply() {}
 
-	public MyReply(String title, String reply, String boardNo, String img) {
+	public MyReply(String title, String reply, String boardNo, String img, String createDate) {
 		super();
 		this.title = title;
 		this.reply = reply;
 		this.boardNo = boardNo;
 		this.img = img;
+		this.createDate = createDate;
 	}
 
 	@Override
@@ -52,5 +54,15 @@ public class MyReply {
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	
+	
 	
 }

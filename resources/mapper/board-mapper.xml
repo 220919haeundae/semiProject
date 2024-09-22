@@ -2,27 +2,28 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="boardMapper">  
-  <resultMap id="selectCategoryBoardListResultSet" type="SelectCategoryBoardListDto">
-	  	<result column="BNO" property="boardNo"/>
-	  	<result column="CBNO" property="categoryBoardNo"/>
-	  	<result column="CNAME" property="clubName" />
-	  	<result column="CNO" property="clubNo" />
-	  	<result column="MNICKNAME" property="memberNicname" />
-	  	<result column="MNO" property="memberNo" />
-	  	<result column="SGNAME" property="smallGroupName" />
-	  	<result column="CATENAME" property="categoryName" />
-	  	<result column="BTITLE" property="boardTitle" />
-	  	<result column="BDATE" property="boardDate" />
-	  	<result column="BCONTENT" property="boardContent" />
-	  	<result column="RCNO" property="recommandNo" />
-	  	<result column="COMPLAIN" property="complain" />
-	  	<result column="VIEWS" property="views" />
-	  	<result column="SCRAP" property="scrap" />
-	  	<result column="CBIMG" property="categoryBoardImage" />
-	  	<result column="MAX_COUNT" property="maxCount" />
-	  	<result column="CUR_COUNT" property="currentCount" />
-  	</resultMap>
+<mapper namespace="boardMapper">
+	<resultMap id="selectCategoryBoardListResultSet"
+		type="SelectCategoryBoardListDto">
+		<result column="BNO" property="boardNo" />
+		<result column="CBNO" property="categoryBoardNo" />
+		<result column="CNAME" property="clubName" />
+		<result column="CNO" property="clubNo" />
+		<result column="MNICKNAME" property="memberNicname" />
+		<result column="MNO" property="memberNo" />
+		<result column="SGNAME" property="smallGroupName" />
+		<result column="CATENAME" property="categoryName" />
+		<result column="BTITLE" property="boardTitle" />
+		<result column="BDATE" property="boardDate" />
+		<result column="BCONTENT" property="boardContent" />
+		<result column="RCNO" property="recommandNo" />
+		<result column="COMPLAIN" property="complain" />
+		<result column="VIEWS" property="views" />
+		<result column="SCRAP" property="scrap" />
+		<result column="CBIMG" property="categoryBoardImage" />
+		<result column="MAX_COUNT" property="maxCount" />
+		<result column="CUR_COUNT" property="currentCount" />
+	</resultMap>
 
 	<!-- 내 모임 게시판 리스트 조회 -->
 	<resultMap id="mySocialSet" type="MySocial">
@@ -38,22 +39,26 @@
 		<result column="bcontent" property="description" />
 		<result column="cbimg" property="img" />
 	</resultMap>
-	
+
 	<resultMap id="myReplySet" type="MyReply">
 		<result column="btitle" property="title" />
 		<result column="Rcontent" property="reply" />
 		<result column="bno" property="boardNo" />
 		<result column="cbimg" property="img" />
+		<result column="rdate" property="createDate" />
 	</resultMap>
-	
-  <insert id="insertBoard" parameterType="Board">
-    INSERT INTO Board(BNO, MNO, KBNO, BTITLE, BCONTENT) VALUES (SEQ_BNO.NEXTVAL, #{memberNo}, #{kindOfBoardNo}, #{title}, #{content})
-    <selectKey resultType="java.lang.Integer" keyProperty="boardNo" order="AFTER">
-            SELECT SEQ_BNO.CURRVAL FROM DUAL
-    </selectKey>
-  </insert>
 
-  <select id="selectCategoryBoardList" resultMap="selectCategoryBoardListResultSet" parameterType="hashmap">
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO Board(BNO, MNO, KBNO, BTITLE, BCONTENT) VALUES
+		(SEQ_BNO.NEXTVAL, #{memberNo}, #{kindOfBoardNo}, #{title}, #{content})
+		<selectKey resultType="java.lang.Integer"
+			keyProperty="boardNo" order="AFTER">
+			SELECT SEQ_BNO.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+
+	<select id="selectCategoryBoardList"
+		resultMap="selectCategoryBoardListResultSet" parameterType="hashmap">
   <![CDATA[
 	 SELECT * FROM (SELECT B.BNO, CB.CBNO, CNAME, C.CNO, MNICKNAME, M.MNO, SGNAME, CATENAME, B.BTITLE, B.BDATE, B.BCONTENT, RCNO, COMPLAIN, VIEWS, SCRAP, CBIMG, MAX_COUNT, CUR_COUNT, ROWNUM AS RN
 	            FROM Board B JOIN BoardCategoryBoard BCB ON (B.BNO = BCB.BNO)
@@ -66,63 +71,90 @@
 	                      JOIN Category C ON (C.CATENO = SGC.CATENO)
 	                      WHERE KB.KBNO = 1 AND B.STATUS = 'N' ORDER BY B.BNO) WHERE RN >= #{startNum} AND RN <= #{endNum}
   ]]>
-  </select>
-  
-  <select id="selectCategoryBoard" resultMap="selectCategoryBoardListResultSet" parameterType="int">
-  SELECT B.BNO, CB.CBNO, CNAME, C.CNO, MNICKNAME, M.MNO, SGNAME, CATENAME, B.BTITLE, B.BDATE, B.BCONTENT, RCNO, COMPLAIN, VIEWS, SCRAP, CBIMG, MAX_COUNT, CUR_COUNT
-            FROM Board B JOIN BoardCategoryBoard BCB ON (B.BNO = BCB.BNO)
-                      JOIN CategoryBoard CB ON (CB.CBNO = BCB.CBNO)
-                      JOIN KindOfBoard KB ON (CB.KBNO = KB.KBNO)
-                      JOIN Member M ON (B.MNO = M.MNO)
-                      JOIN Club C ON (C.CNO = CB.CNO)
-                      JOIN SmallGroupCategory SGC ON (CB.SGCNO = SGC.SGCNO)
-                      JOIN SmallGroup SG ON (SG.SGNO = SGC.SGNO) 
-                      JOIN Category C ON (C.CATENO = SGC.CATENO) 
-                      WHERE KBNO = 1 AND B.BNO = #{boardId} AND B.STATUS = 'N'
-  </select>
-  
-  <update id="deleteCategoryBoard" parameterType="int">
-  	UPDATE Board SET STATUS = 'Y' WHERE BNO = #{boardNo}
-  </update>
-  
-  <update id="updateBoard" parameterType="hashmap">
-  	UPDATE Board SET BCONTENT = #{content}, BTITLE = #{title} WHERE BNO = #{boardNo}
-  </update>
+	</select>
+
+	<select id="selectCategoryBoard"
+		resultMap="selectCategoryBoardListResultSet" parameterType="int">
+		SELECT
+		B.BNO, CB.CBNO, CNAME, C.CNO, MNICKNAME, M.MNO, SGNAME, CATENAME,
+		B.BTITLE, B.BDATE, B.BCONTENT, RCNO, COMPLAIN, VIEWS, SCRAP, CBIMG,
+		MAX_COUNT, CUR_COUNT
+		FROM Board B JOIN BoardCategoryBoard BCB ON (B.BNO
+		= BCB.BNO)
+		JOIN CategoryBoard CB ON (CB.CBNO = BCB.CBNO)
+		JOIN
+		KindOfBoard KB ON (CB.KBNO = KB.KBNO)
+		JOIN Member M ON (B.MNO = M.MNO)
+		JOIN Club C ON (C.CNO = CB.CNO)
+		JOIN SmallGroupCategory SGC ON
+		(CB.SGCNO = SGC.SGCNO)
+		JOIN SmallGroup SG ON (SG.SGNO = SGC.SGNO)
+		JOIN
+		Category C ON (C.CATENO = SGC.CATENO)
+		WHERE KBNO = 1 AND B.BNO =
+		#{boardId} AND B.STATUS = 'N'
+	</select>
+
+	<update id="deleteCategoryBoard" parameterType="int">
+		UPDATE Board SET
+		STATUS = 'Y' WHERE BNO = #{boardNo}
+	</update>
+
+	<update id="updateBoard" parameterType="hashmap">
+		UPDATE Board SET BCONTENT
+		= #{content}, BTITLE = #{title} WHERE BNO =
+		#{boardNo}
+	</update>
 
 
 	<!-- 참여한 소모임 리스트 -->
 	<select id="selectMySocial" resultMap="mySocialSet">
-		SELECT A.BTITLE, A.BCONTENT, A.BNO, B.CBIMG
-		FROM BOARD A
-			JOIN CATEGORYBOARD B ON (A.KBNO = B.KBNO)
-			JOIN MEMBERCLUB C ON (B.CNO = C.CNO)
-		WHERE C.MNO = #{userNo}  <!-- AND STATUS = 'N' -->
+		SELECT DISTINCT(BNO),
+		BTITLE, BCONTENT, CBIMG
+		FROM CATEGORYBOARD
+		JOIN BOARDCATEGORYBOARD USING
+		(CBNO)
+		JOIN BOARD USING (BNO)
+		WHERE STATUS = 'N' AND CNO IN (
+		SELECT CNO
+		FROM MEMBERCLUB
+		WHERE MNO = #{userNo}
+		)
+		ORDER BY BNO
 	</select>
 	<!-- 참여한 소모임 갯수 -->
 	<select id="selectMySocialCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD A
-			JOIN CATEGORYBOARD B ON (A.KBNO = B.KBNO)
-			JOIN MEMBERCLUB C ON (B.CNO = C.CNO)
-		WHERE C.MNO = #{userNo} <!-- AND STATUS = 'N' --> 
+		FROM
+		CATEGORYBOARD
+		JOIN BOARDCATEGORYBOARD USING (CBNO)
+		JOIN BOARD USING
+		(BNO)
+		WHERE STATUS = 'N' AND CNO IN (
+		SELECT CNO
+		FROM MEMBERCLUB
+		WHERE MNO = #{userNo}
+		)
 	</select>
 	<!-- ************************************************************ -->
 
 	<!-- 댓글 작성한 소모임 리스트 -->
 	<select id="myReply" resultMap="myReplySet">
-		SELECT A.BTITLE, C.RCONTENT, A.BNO, B.CBIMG
-		FROM BOARD A
-			JOIN CATEGORYBOARD B ON (A.KBNO = B.KBNO)
-			JOIN REPLY C ON (A.BNO = C.BNO)
-		WHERE C.MNO = #{userNo} <!-- AND STATUS = 'N' -->
+		SELECT BTITLE, RCONTENT, A.BNO, CBIMG, TO_CHAR(RDATE, 'YYYY-MM-DD') RDATE
+		FROM REPLY A
+			JOIN BOARD B ON (A.BNO = B.BNO)
+			JOIN BOARDCATEGORYBOARD C ON (B.BNO = C.BNO)
+			JOIN CATEGORYBOARD D ON (C.CBNO = D.CBNO)
+		WHERE A.MNO = #{userNo} AND B.STATUS='N'
 	</select>
 	<!-- 댓글 작성한 소모임 갯수 -->
 	<select id="selectMyReplyCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD A
-			JOIN CATEGORYBOARD B ON (A.KBNO = B.KBNO)
-			JOIN REPLY C ON (A.BNO = C.BNO)
-		WHERE C.MNO = #{userNo}  <!-- AND STATUS = 'N' -->
+		FROM REPLY A
+			JOIN BOARD B ON (A.BNO = B.BNO)
+			JOIN BOARDCATEGORYBOARD C ON (B.BNO = C.BNO)
+			JOIN CATEGORYBOARD D ON (C.CBNO = D.CBNO)
+		WHERE A.MNO = #{userNo} AND B.STATUS='N'
 	</select>
 	<!-- ************************************************************ -->
 
@@ -130,8 +162,10 @@
 	<select id="MyBookmark" resultMap="myBookmarkSet">
 		SELECT A.BNO, A.BTITLE, A.BCONTENT, B.CBIMG
 		FROM BOARD A
-			JOIN CATEGORYBOARD B ON (A.KBNO = B.KBNO)
-			JOIN BOOKCATEGORY C ON (B.CBNO = C.CBNO)
+		JOIN
+		CATEGORYBOARD B ON (A.KBNO = B.KBNO)
+		JOIN BOOKCATEGORY C ON (B.CBNO =
+		C.CBNO)
 		WHERE C.MNO = #{userNo} <!-- AND STATUS = 'N' -->
 	</select>
 
@@ -139,15 +173,18 @@
 	<select id="selectMyBookmarkCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM BOARD A
-			JOIN CATEGORYBOARD B ON (A.KBNO = B.KBNO)
-			JOIN BOOKCATEGORY C ON (B.CBNO = C.CBNO)
-		WHERE C.MNO = #{userNo} <!-- AND STATUS = 'N' -->
+		JOIN CATEGORYBOARD B ON (A.KBNO = B.KBNO)
+		JOIN BOOKCATEGORY C ON (B.CBNO = C.CBNO)
+		WHERE C.MNO = #{userNo} <!-- AND 
+			STATUS = 'N' -->
 	</select>
-	
+
 	<!-- 1:1 문의 게시글 삽입 -->
 	<insert id="insertInquiryBoard">
-		INSERT INTO BOARD(BNO, MNO, KBNO, BTITLE, BDATE, BCONTENT, ORGFILENAME, CHGFILENAME)
-		VALUES(SEQ_BNO.NEXTVAL, #{userNo}, 10, #{boardTitle}, SYSDATE, #{boardContent}, #{originFileNames},
+		INSERT INTO BOARD(BNO, MNO, KBNO, BTITLE, BDATE,
+		BCONTENT, ORGFILENAME, CHGFILENAME)
+		VALUES(SEQ_BNO.NEXTVAL, #{userNo},
+		10, #{boardTitle}, SYSDATE, #{boardContent}, #{originFileNames},
 		#{changeFileNames})
 	</insert>
 	<!-- ***************************************************************** -->

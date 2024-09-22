@@ -17,10 +17,10 @@
         	<c:forEach var="myReply" items="${ myReplyList }">
         	<a href="showBoard.me?board_id=${myReply.boardNo }">
             <div class="comment-item">
-                <img src="#" alt="Group Image">
+                <img src="${ myReply.img }" alt="Group Image">
                 <div class="comment-info">
                     <h3>${ myReply.title }</h3>
-                    <h5>작성일</h5>
+                    <h6>${ myReply.createDate }</h6>
                     <p>${ myReply.reply }</p>
                 </div>
             </div>
