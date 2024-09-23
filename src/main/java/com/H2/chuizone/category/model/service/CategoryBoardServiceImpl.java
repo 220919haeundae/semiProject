@@ -30,10 +30,10 @@ public class CategoryBoardServiceImpl implements CategoryBoardService {
 	private BoardService boardService = new BoardServiceImpl();
 	
 	@Override
-	public int selectMaxPageNumber() {
+	public int selectMaxPageNumber(int categoryNo, String keyword) {
 		SqlSession sqlSession = MybatisTemplate.getSqlSession();
 
-		return categoryBoardDao.selectMaxPageNumber(sqlSession);
+		return categoryBoardDao.selectMaxPageNumber(sqlSession, categoryNo, keyword);
 	}
 
 	@Override

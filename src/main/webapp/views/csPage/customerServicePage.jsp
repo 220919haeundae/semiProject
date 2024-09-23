@@ -21,10 +21,10 @@
                 <!-- Sidebar -->
                 <div id="side-bar">
                     <ul>
-                        <li><a href="toFaqPage.do" id="#">자주 묻는 질문</a></li>
+                        <li><a href="toFaqPage.do">자주 묻는 질문</a></li>
                         
                         <c:if test="${ !empty loginUser }">
-                        	<li><a href="toPiPage.do" id="#">1:1 문의</a></li>
+                        	<li><a href="toPiPage.do?userNo=${loginUser.userNo}">1:1 문의</a></li>
                         </c:if>
                         
                     </ul>

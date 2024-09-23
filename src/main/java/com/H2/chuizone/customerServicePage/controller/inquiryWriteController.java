@@ -44,7 +44,8 @@ public class InquiryWriteController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String userNo = request.getParameter("userNo");
-		String boardType = request.getParameter("boardType");
+		String kindOfBoard = request.getParameter("kindOfBoard");
+		String inquiryGroup = request.getParameter("inquiryGroup");
 		String inquiryTitle = request.getParameter("inquiryTitle");
 		String inquiryContent = request.getParameter("inquiryContent");
 		Collection<Part> parts = request.getParts();
@@ -107,14 +108,19 @@ public class InquiryWriteController extends HttpServlet {
 		}
 		
 		Board b = new Board();
+		b.setUserNo(userNo);
+		b.setKindOfBoard(kindOfBoard);
 		b.setBoardTitle(inquiryTitle);
 		b.setBoardContent(inquiryContent);
-		b.setUserNo(userNo);
-		b.setBoardType(boardType);
-		b.setOriginFileNames(originFileNames.toString());
-		b.setChangeFileNames(changeFileNames.toString());
 		
-		result = new CustomerService().insertInquiryBoard(b);
+		Board b1 = new Board();
+		b1.setInquiryGroup(inquiryGroup);
+		b1.setKindOfBoard(kindOfBoard);
+		b1.setOriginFileNames(originFileNames.toString());
+		b1.setChangeFileNames(changeFileNames.toString());
+		
+		result = new CustomerService().insertInquiryBoard(b, b1);
+		
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "요청이 성공적으로 전달되었습니다.");

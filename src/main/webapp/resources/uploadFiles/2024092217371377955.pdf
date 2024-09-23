@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>내가 작성한 문의</title>
+
+<link rel="stylesheet"
+	href="http://localhost:8080/MemberCenter/views/css/miPage.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>header</title>
+<!-- 부트스트랩 스크립트 코드 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+
+@font-face {
+    font-family: 'HancomMalangMalang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2406-1@1.0/HancomMalangMalang-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header {
+	/* border: red solid 1px; */
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 5px;
+	width: 100%;
+	min-width: 1200px;
+	height: 82px;
+	border-bottom: lightgray 1px solid;
+}
+
+#img-area {
+	flex: left;
+	width: 15%;
+}
+
+.nav-area {
+	/* border: red solid 1px; */
+	width: 60%;
+	display: flex;
+	justify-content: space-evenly;
+	
+}
+
+
+
+.menu {
+	/* border: red solid 1px; */
+	display: flex;
+	width: 150px;
+	height: 70px;
+	/* background-color: aqua;
+            border: black solid; */
+}
+
+.menu a {
+	/* border: red solid 1px; */
+	color: black;
+	font-size: 20px;
+	font-weight: 900;
+	border-radius: 15px;
+	transition: 0.3s ease-out;
+	opacity: 0.9;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	line-height: 65px;
+}
+
+.menu a:hover {
+	color: white;
+	text-decoration: none;
+	background-color: violet;
+}
+
+.login-area {
+	/* border: red solid 1px; */
+	width: 15%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 3px;
+}
+
+.before-login {
+	display: flex;
+}
+
+.before-login * {
+	line-height: 75px;
+}
+
+.after-login {
+	display: flex;
+}
+
+.after-login * {
+	line-height: 75px;
+}
+
+.before-login button {
+	/* border: red solid 1px; */
+	border: none;
+	background-color: cornflowerblue;
+	font-weight: 900;
+	padding: 10px;
+	margin: 3px;
+	border-radius: 15px;
+}
+
+.before-login button:hover {
+	color: white;
+	background-color: violet;
+	transition: 0.3s ease-out;
+	opacity: 0.9;
+}
+
+.after-login td {
+	height: 100%;
+	margin: 5px;
+}
+
+.after-login button {
+	background-color: violet;
+	border: none;
+}
+
+.after-login button:hover {
+	background-color: cornflowerblue;
+}
+
+#profile-icon {
+	/* border: blue solid 2px; */
+	align-content: center;
+}
+
+#profile-icon img {
+	width: 40px;
+	height: 40px;
+}
+
+.dropdown button {
+	/* border: red solid 1px; */
+	width: 120px;
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+	<div class="header">
+		<!-- 카테고리 영역 -->
+		<div id="img-area">img</div>
+		<div class="nav-area" align="center">
+			<div class="menu">
+				<a href="#">HOME</a>
+			</div>
+			<div class="menu">
+				<a href="#">카테고리</a>
+			</div>
+			<div class="menu">
+				<a href="#">공지사항</a>
+			</div>
+			<div class="menu">
+				<a href="#">고객센터</a>
+			</div>
+		</div>
+
+
+
+
+		<div class="login-area">
+			<!-- 로그인 전 -->
+			<!-- <div class="before-login">
+                <button id="btn-login">로그인</button>
+                <button id="btn-join">회원가입</button>
+            </div> -->
+
+			<!-- 로그인 후 -->
+			<div class="after-login">
+				<div id="profile-icon">
+					<img src="views/img/user_img.png" alt="아이콘">
+				</div>
+
+				<div class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown">ㅇㅇㅇ님</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">마이페이지</a> <a
+							class="dropdown-item" href="#">로그아웃</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+</html>
+	<div id="bodySection">
+
+		<h2>1:1문의 조회</h2>
+
+		<div class="container">
+
+			<div class="form-group title-area" style="display: flex; justify-content: space-between;">
+				<label for="title">제목</label>
+				<input type="text" id="title" name="title" class="display-title" style="width:75%" readonly/>
+				<input type="text" id="wdate" name="wdate" class="display-date" value="2024. 09. 07." style="width:20%" readonly/>
+			</div>
+			<label for="content">내용</label>
+			<div class="file-input">
+				<label for="fileDownload">첨부파일</label><a href="#" id="fileDownload" download="새로운파일이름.pdf">파일 다운로드</a>
+			</div>
+			<div class="form-group">
+				<textarea id="content" name="content" class="input-content" readonly></textarea>
+			</div>
+			<div class="button-group">
+				<button class="cancel-button">삭제</button>
+				<button class="save-button">수정</button>
+			</div>
+
+
+		</div>
+
+	</div>
+	
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>footer</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    .footer {
+        background-color: rgb(255, 231, 255);
+        font-size: 12px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    table {
+        /* border: red solid 2px; */
+        font-size: 14px;
+        width: 60%;
+        margin-left: 10%;
+    }
+
+    tr, td {
+        /* border: blue solid 1px; */
+        padding: 10px;
+    }
+
+    .footer div {
+        margin-left: 10%;
+        margin-top: 10px;
+        color: rgb(121, 121, 121);
+    }
+</style>
+
+</head>
+<body>
+    <div class="footer">
+        <table>
+            <tr>
+                <th>주소</th>
+                <td>서울특별시 강남구 테헤란로 10길 9</td>
+            </tr>
+            <tr>
+                <th>연락처</th>
+                <td>1544-9970</td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td>example@kh.com</td>
+            </tr>
+            <tr>
+                <th>고객센터 운영 시간</th>
+                <td>월~금 9:00 ~ 18:00</td>
+            </tr>
+        </table>
+        <div>&copy; Hobby Harvest 모든 권리 보유.</div>
+    </div>
+
+</body>
+</html>
+</body>
+</html>

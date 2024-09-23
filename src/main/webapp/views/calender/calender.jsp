@@ -1,3 +1,7 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.h2.chuizone.calender.model.dto.CalenderDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -62,20 +66,38 @@
 
 </head>
 <body>
+<%
+	request.setCharacterEncoding("utf-8");
+
+	ObjectMapper mapper = new ObjectMapper();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");        
+	mapper.setDateFormat(dateFormat);
+	List<CalenderDto> calender = (List<CalenderDto>)request.getAttribute("calender");
+	String jsonCalender = mapper.writeValueAsString(calender);
+%>
 <jsp:include page="../common/header.jsp" />
     <div class="calender-frame">
         <div class="calender-content-frame">
-            <div class="calender-title">[ XXXX모임 캘린더 ]</div>
+            <div class="calender-title">[ <%= request.getAttribute("clubName") %> 모임 캘린더 ]</div>
             <div id='calendar-container'>
                 <div id='calendar'></div>
-            </div>
-            <div>
-                <button class="btn-style">저장</button>
             </div>
         </div>
     </div>
 <jsp:include page="../common/footer.jsp" />
     <script>
+    	let calender = <%= jsonCalender %>;
+    	
+    	let calenderList = [];
+    	for(let i of calender) {
+    		calenderList.push({
+    			title: i.title,
+                url: 'showCalender.me?boardNo=' + i.boardNo + "&clubName=" + '<%= request.getAttribute("clubName") %>', // 클릭시 해당 url로 이동
+                start: i.startDate,
+                end: i.endDate
+    		})
+    	}
+
         (function(){
           $(function(){
             // calendar element 취득
@@ -110,8 +132,8 @@
               },
               select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
                 <!-- var title = prompt('Event Title:'); -->
-                location.href = "calenderWrite.me?board_id="+<%= request.getAttribute("board_id")%>+
-                		"&startDate=" + arg.startStr + "&endDate=" + arg.endStr;
+                location.href = "calenderWrite.me?categoryBoardNo="+<%= request.getAttribute("categoryBoardNo")%>+
+                		"&startDate=" + arg.startStr + "&endDate=" + arg.endStr + "&clubName=" + '<%= request.getAttribute("clubName") %>';
                 console.log(arg);
                 if (title) {
                   calendar.addEvent({
@@ -124,17 +146,7 @@
                 calendar.unselect()
               },
               // 이벤트 
-              events: [
-                {
-                  title: 'All Day Event',
-                  start: '2024-09-06',
-                },
-                {
-                  title: 'Click for Google',
-                  url: 'calender-view.jsp', // 클릭시 해당 url로 이동
-                  start: '2024-09-10'
-                }
-              ]
+              events: calenderList
             });
             // 캘린더 랜더링
             calendar.render();

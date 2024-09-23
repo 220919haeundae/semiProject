@@ -210,7 +210,7 @@
 	            </div>
 	            
 	            <div class="btn-frame">
-	                <button class="btn-style">취소</button>
+	                <button class="btn-style" type="button" onclick="cancel();">취소</button>
 	                <button type="sumit" class="btn-style">등록</button>
 	            </div>
             </form>
@@ -232,6 +232,10 @@
             hiddenInputTitle.value = titleDiv.innerHTML;
         }
 		
+        function cancel() {
+        	history.back();
+        }
+        
         function selectCategory(target) {
 			const childEle = $("select[name=board_group]").children();
 			childEle.remove();

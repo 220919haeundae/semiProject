@@ -111,35 +111,65 @@
 
 </head>
 <body>
-    <div class="calender-write-frame">
-        <div class="calender-write-area" >
-            <div class="calender-write-title">캘린더 일정 작성</div>
-
-            <div class="calender-write-title-area">
-                <div class="calender-title">제목</div>
-                <div class="calender-write-title-content">제목입니다.</div>
-            </div>
-            
-            <div class="calender-date-frame">
-                <div class="calender-date-title">날짜</div>
-                <div class="calender-date-start-end">
-                    <p class="calender-date-start">시작일<br><input type="date" value="<%= request.getParameter("startDate") %>"></p>
-                    <p class="calender-date-end">종료일<br><input type="date" value="<%= request.getParameter("endDate") %>"></p>
-                </div>
-            </div>
-
-            <div class="calender-content-area">
-                <div>
-                    <div class="calender-content-title">내용</div>
-                </div>
-                <div class="content" contenteditable placeholder='내용을 입력해 주세요...'></div>
-            </div>
-            
-            <div class="btn-frame">
-                <button class="btn-style">취소</button>
-                <button class="btn-style">등록</button>
-            </div>
-        </div>
-    </div>
+<jsp:include page="../common/header.jsp" />
+	<form id="my-form" action="writeCalender.me" method="post">
+	    <div class="calender-write-frame">
+	        <div class="calender-write-area" >
+	            <div class="calender-write-title">캘린더 일정 작성</div>
+				<input type="hidden" name="categoryBoardNo" id="categoryBoardNo" value="<%= request.getParameter("categoryBoardNo") %>">
+				
+	            <div class="calender-write-title-area">
+	                <div class="calender-title">제목</div>
+	                <div class="calender-write-title-content" contenteditable placeholder='내용을 입력해 주세요...' id="div-title"></div>
+	                <input type="hidden" name="title" id="hidden-title">
+	            </div>
+	            
+	            <div class="calender-date-frame">
+	                <div class="calender-date-title">날짜</div>
+	                <div class="calender-date-start-end">
+	                    <p class="calender-date-start">시작일<br><input type="date" value="<%= request.getParameter("startDate") %>" name="startDate"></p>
+	                    <p class="calender-date-end">종료일<br><input type="date" value="<%= request.getParameter("endDate") %>" name="endDate"></p>
+	                </div>
+	            </div>
+	
+	            <div class="calender-content-area">
+	                <div>
+	                    <div class="calender-content-title">내용</div>
+	                </div>
+	                <div class="content" contenteditable placeholder='내용을 입력해 주세요...' id="div-content"></div>
+	                <input type="hidden" name="content" id="hidden-content">
+	            </div>
+	            
+	            <div class="btn-frame">
+	                <button class="btn-style" type="button" onclick="cancel();">취소</button>
+	                <button type="submit" class="btn-style">등록</button>
+	            </div>
+	        </div>
+	    </div>
+    </form>
+    <jsp:include page="../common/footer.jsp" />
+    
+    <script>
+	    // 폼 제출 전 div 내용 추출
+	    function prepareFormData() {
+	        const contentDiv = document.getElementById('div-content');
+	        const titleDiv = document.getElementById('div-title');
+	        const hiddenInputContent = document.getElementById('hidden-content');
+	        const hiddenInputTitle = document.getElementById('hidden-title');
+	
+	        // div의 HTML 내용을 가져와서 hidden input 필드에 설정
+	        hiddenInputContent.value = contentDiv.innerHTML;
+	        hiddenInputTitle.value = titleDiv.innerHTML;
+	    }
+	    
+	    function cancel() {
+	    	location.href = "calender.me?categoryBoardNo=" + ${ categoryBoardNo } + "&clubName=" + '${ clubName }';
+	    }
+	    
+	 	// 폼 제출 시 prepareFormData 함수 호출
+        document.getElementById('my-form').addEventListener('submit', function(event) {
+            prepareFormData();
+        });
+    </script>
 </body>
 </html>

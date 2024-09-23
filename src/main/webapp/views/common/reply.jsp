@@ -1,3 +1,4 @@
+<%@page import="com.h2.chuizone.calender.model.dto.CalenderDto"%>
 <%@page import="com.h2.chuizone.common.reply.model.dto.ReplyDto"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.fasterxml.jackson.databind.module.SimpleModule"%>
@@ -111,9 +112,16 @@ a {
 	
 	List<ReplyDto> replies = mapper.readValue(jsonReplies, mapper.getTypeFactory().constructCollectionType(List.class, ReplyDto.class));
     request.setAttribute("replys", replies);
-    System.out.println(replies.toString());
-    SelectCategoryBoardListDto boardData = mapper.readValue(jsonBoards, SelectCategoryBoardListDto.class);
-    request.setAttribute("board_datas", boardData);
+	
+    if(request.getParameter("type").equals("카테고리")) {
+    	SelectCategoryBoardListDto boardData = mapper.readValue(jsonBoards, SelectCategoryBoardListDto.class);
+        request.setAttribute("board_datas", boardData);	
+    } else if(request.getParameter("type").equals("캘린더")) {
+    	CalenderDto boardData = mapper.readValue(jsonBoards, CalenderDto.class);
+    	request.setAttribute("board_datas", boardData);
+    } else {
+    	
+    }
 %>
 
 	<div id="section-border-comment-reply">
@@ -289,7 +297,8 @@ a {
                          method: 'POST',
                          data : {
                         	 reply: resultData,
-                        	 board_data: JSON.stringify(board_datas)
+                        	 board_data: JSON.stringify(board_datas),
+                        	 type: '<%= request.getParameter("type") %>'
                          },
                          success: function(result) {
                         	 $('#reply-body').empty()
@@ -323,7 +332,8 @@ a {
                          method: 'POST',
                          data : {
                         	 reply: resultData,
-                        	 board_data: JSON.stringify(board_datas)
+                        	 board_data: JSON.stringify(board_datas),
+                        	 type: '<%= request.getParameter("type") %>'
                          },
                          success: function(result) {
                         	 $('#reply-body').empty()
@@ -363,7 +373,8 @@ a {
                          method: 'POST',
                          data : {
                         	 reply: resultData,
-                        	 board_data: JSON.stringify(board_datas)
+                        	 board_data: JSON.stringify(board_datas),
+                        	 type: '<%= request.getParameter("type") %>'
                          },
                          success: function(result) {
                         	 $('#reply-body').empty()

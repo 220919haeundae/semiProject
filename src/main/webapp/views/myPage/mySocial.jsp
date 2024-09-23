@@ -31,7 +31,7 @@
             </div>
             
             <c:if test="${pi.maxPage>1 }">
-            <ul class="pagination justify-content-center">
+            <ul class="pagination justify-content-center" style="margin-top: 20px;">
 				<li class="page-item"><a class="page-link" href="toMySocial.do?cpage=${ pi.currentPage-1 }">Previous</a></li>
 				<c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<li class="page-item"><a class="page-link" href="toMySocial.do?cpage=${ i }">${ i }</a></li>

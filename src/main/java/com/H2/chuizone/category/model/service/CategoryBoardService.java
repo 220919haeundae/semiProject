@@ -6,9 +6,11 @@ import com.h2.chuizone.common.board.model.vo.Board;
 public interface CategoryBoardService {
 	/**
 	 * 게시글의 개수를 알기위한 Select 쿼리문
+	 * @param 카테고리 번호
+	 * @param 검색 키워드
 	 * @return 게시글의 갯수
 	 */
-	int selectMaxPageNumber();
+	int selectMaxPageNumber(int categoryNo, String keyword);
 	
 	/**
 	 * 카테고리 보드 테이블 & 보드 테이블에 데이터 삽입하기 위한 쿼리문

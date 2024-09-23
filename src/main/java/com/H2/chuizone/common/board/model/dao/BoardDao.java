@@ -14,12 +14,23 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", board);
 	}
 	
-	public List<SelectCategoryBoardListDto> selectCategoryBoardList(SqlSession sqlSession, int startNum, int endNum) {
-		Map<String, Integer> map = new HashMap<>();
-		map.put("startNum", startNum);
-		map.put("endNum", endNum);
+	public List<SelectCategoryBoardListDto> selectCategoryBoardList(SqlSession sqlSession, int startNum, int endNum, int categoryNo, String keyword) {
+		Map<String, Object> map = new HashMap<>();
 		
-		return sqlSession.selectList("boardMapper.selectCategoryBoardList", map);
+		if(keyword.isEmpty()) {
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+			map.put("categoryNo", categoryNo);
+			
+			return sqlSession.selectList("boardMapper.selectCategoryBoardList", map);
+		} else {
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+			map.put("categoryNo", categoryNo);
+			map.put("keyword", keyword);
+			
+			return sqlSession.selectList("boardMapper.selectCategoryBoardListKeyword", map);
+		}
 	}
 	
 	public SelectCategoryBoardListDto selectCategoryBoard(SqlSession sqlSession, int boardId) {

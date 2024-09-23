@@ -10,6 +10,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MybatisTemplate {
 	
+	/**
+	 * Mybatis의 SqlSession객체 생성을 위한 함수
+	 * @return SqlSession 객체
+	 */
 	public static SqlSession getSqlSession() {
 		
 		SqlSession sqlSession = null;

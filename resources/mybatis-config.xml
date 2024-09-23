@@ -32,6 +32,12 @@
 		<typeAlias type="com.h2.chuizone.mypage.model.vo.MySocial" alias="MySocial" />
 		<typeAlias type="com.h2.chuizone.mypage.model.vo.MyReply" alias="MyReply" />
 		<typeAlias type="com.h2.chuizone.mypage.model.vo.MyBookmark" alias="MyBookmark" />
+		<typeAlias type="com.h2.chuizone.calender.model.vo.Calender" alias="Calender" />
+		<typeAlias type="com.h2.chuizone.common.boardcalender.model.vo.BoardCalender" alias="BoardCalender" />
+		<typeAlias type="com.h2.chuizone.common.calendercategoryboard.model.vo.CalenderCategoryBoard" alias="CalenderCategoryBoard" />	
+		<typeAlias type="com.h2.chuizone.calender.model.dto.CalenderDto" alias="CalenderDto" />
+		<typeAlias type="com.h2.chuizone.customerServicePage.model.vo.Board" alias="BoardLy" />
+		<typeAlias type="com.h2.chuizone.customerServicePage.model.vo.InquiryBoard" alias="InquiryBoard" />
 	</typeAliases>
 	<environments default="develop">
 		<environment id="develop">
@@ -58,6 +64,9 @@
 		<mapper resource="/mapper/board-mapper.xml"/>
 		<mapper resource="/mapper/board-category-board-mapper.xml"/>
 		<mapper resource="/mapper/club-mapper.xml"/>
+		<mapper resource="/mapper/calendar-mapper.xml"/>
+		<mapper resource="/mapper/calendar-category-board-mapper.xml"/>
+		<mapper resource="/mapper/board-calendar-mapper.xml"/>
 		<mapper resource="/mapper/kind-of-board-mapper.xml"/>
 		<mapper resource="/mapper/small-group-category-mapper.xml"/>
 		<mapper resource="/mapper/category-board-recommand-mapper.xml"/>

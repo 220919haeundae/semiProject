@@ -552,10 +552,10 @@
 	</div>
 
 	<div id="reply-body">
-		<%-- <%@ include file="../common/reply.jsp"%> --%>
 		<jsp:include page="../common/reply.jsp">
 			<jsp:param value="<%= jsonReply %>" name="reply" />
 			<jsp:param value="<%= jsonBoard %>" name="board_data" />
+			<jsp:param value="카테고리" name="type" />
 		</jsp:include>
 	</div>
 
@@ -598,7 +598,7 @@
 		let reviews = <%=jsonReview%>;
 		
     	function goToCalender() {
-    		location.href = "calender.me?board_id=" + <%=request.getParameter("board_id")%>;
+    		location.href = "calender.me?categoryBoardNo=" + ${ board_data.categoryBoardNo } + "&clubName=" + '${ board_data.clubName }';
     	}
     	
     	function join() {

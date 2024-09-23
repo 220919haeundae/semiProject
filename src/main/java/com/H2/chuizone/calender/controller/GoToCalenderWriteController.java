@@ -27,11 +27,13 @@ public class GoToCalenderWriteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int board_id = Integer.parseInt(request.getParameter("board_id"));
+		int categoryBoardNo = Integer.parseInt(request.getParameter("categoryBoardNo"));
+		String clubName = request.getParameter("clubName");
 		Date startDate = Date.valueOf(request.getParameter("startDate"));
 		Date endDate =  Date.valueOf(request.getParameter("endDate"));
 		
-		request.setAttribute("board_id", board_id);
+		request.setAttribute("categoryBoardNo", categoryBoardNo);
+		request.setAttribute("clubName", clubName);
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
 		

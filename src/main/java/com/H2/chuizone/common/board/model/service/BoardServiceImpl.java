@@ -28,10 +28,10 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<SelectCategoryBoardListDto> selectCategoryBoardList(int startNum, int endNum) {
+	public List<SelectCategoryBoardListDto> selectCategoryBoardList(int startNum, int endNum, int categoryNo, String keyword) {
 		SqlSession sqlSession = MybatisTemplate.getSqlSession();
 		
-		return boardDao.selectCategoryBoardList(sqlSession, startNum, endNum);
+		return boardDao.selectCategoryBoardList(sqlSession, startNum, endNum, categoryNo, keyword);
 	}
 
 	@Override

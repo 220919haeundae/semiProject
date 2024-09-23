@@ -20,6 +20,9 @@
 	background-color: #d9d9d9;
 	margin: auto;
 	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #boarder-area {
@@ -199,6 +202,14 @@
 	width: 100%;
 	height: 100%;
 }
+
+.category-frame {
+	margin: 0px 10px;
+	font-size: 30pt;
+	width: 20%;
+	text-align: center;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -207,7 +218,11 @@
 	%>
 	<jsp:include page="../common/header.jsp" />
 
-	<div id="category-menu"></div>
+	<div id="category-menu">
+		<c:forEach var="cate" items="${ category }">
+			<div class="category-frame" onclick="goToCategory(${ cate.categoryNo });">${ cate.categoryName }</div>
+		</c:forEach>
+	</div>
 
 	<div id="boarder-area">
 		<div id="board-section">
@@ -217,7 +232,7 @@
 		<div id="board-info-section">
 			<div id="search">
 				<input id="search-content" type="text" placeholder="Search...">
-				<button id="btn-search-icon"></button>
+				<button id="btn-search-icon" onclick="searchCategory(${ categoryNo });"></button>
 			</div>
 
 			<%@ include file="pageing.jsp"%>
@@ -231,6 +246,14 @@
 	<script>
 		function boardWrite() {
 			location.href = "categoryWrite.me";
+		}
+		
+		function goToCategory(categoryId) {
+			location.href = "selectBoardList.me?page=1&categoryNo=" + categoryId;
+		}
+		
+		function searchCategory(categoryId) {
+			location.href = "selectBoardList.me?page=1&categoryNo=" + categoryId + "&keyword=" + $('#search-content').val();
 		}
 	</script>
 </body>

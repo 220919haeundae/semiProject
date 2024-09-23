@@ -1,23 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>1:1문의</title>
-<link rel="stylesheet" href="http://localhost:8080/hobbyharvest/views/css/csPage.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="views/css/csPage.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<jsp:include page="customerServicePage.jsp"></jsp:include>
@@ -25,13 +20,26 @@
 
 
 	<div class="pi">
-
+		
 		<h2>1:1 문의</h2>
+		<c:forEach var="myInquiry" items="${ inquiryList }">
 		<div class="pia">
-			<h6>작성자 이름</h6>
-			<small>작성일</small>
+			<div style="display: inline-block;">
+				<small><b>${ myInquiry.createDate }</b></small> &nbsp;&nbsp;&nbsp;&nbsp;
+				<p style="display: inline-block; padding: 0; margin: auto;">
+				${myInquiry.boardTitle }
+				</p>
+			</div>
+			<div>
+				<small><b>${ myInquiry.inquiryGroupName }</b></small> &nbsp;&nbsp;&nbsp;&nbsp;
+				<p style="display: inline-block; padding: 0; margin: auto; overflow: he">
+				${myInquiry.boardContent }
+				</p>
+			</div>
+			
+			
 		</div>
-
+		</c:forEach>
 
 		<div class="under-side justify-content-center row" style="margin: auto; display: flex;">
 

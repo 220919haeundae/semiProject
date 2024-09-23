@@ -32,7 +32,7 @@
 	<div class="container">
 	<form action="inquiry.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name = "userNo" value = "${ loginUser.userNo }"/>
-	<input type="hidden" name = "boardType" value = "inquiryBoard"/>
+	<input type="hidden" name = "kindOfBoard" value = "10"/>
 		<div class="form-group">
 				<label for="title">제목</label>
 				<input type="text" id="title" name="inquiryTitle" class="input-title" />
@@ -45,6 +45,16 @@
 		<div class="file-input">
 			<label for="fileUpload">첨부파일2</label>
 			<input type="file" id="fileUpload" name="upfile"/>
+		</div>
+		<div>
+			<label for="kind-of-inquiry">문의분류</label>
+			<select id="kind-of-inquiry" name="inquiryGroup">
+				<option value="1">계정 관련 문의</option>
+				<option value="2">불편사항 관련 문의</option>
+				<option value="3">...</option>
+				<option value="4">...</option>
+				<option value="5">...</option>
+			</select>
 		</div>
 		<div class="form-group">
 				<textarea id="content" name="inquiryContent" class="input-content"></textarea>

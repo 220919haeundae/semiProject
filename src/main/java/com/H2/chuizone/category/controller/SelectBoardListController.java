@@ -15,6 +15,9 @@ import com.h2.chuizone.category.model.service.CategoryBoardServiceImpl;
 import com.h2.chuizone.common.Pageing;
 import com.h2.chuizone.common.board.model.service.BoardService;
 import com.h2.chuizone.common.board.model.service.BoardServiceImpl;
+import com.h2.chuizone.common.category.model.service.CategoryService;
+import com.h2.chuizone.common.category.model.service.CategoryServiceImpl;
+import com.h2.chuizone.common.category.model.vo.Category;
 
 /**
  * Servlet implementation class selectBoardListController
@@ -37,17 +40,35 @@ public class SelectBoardListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		CategoryBoardService categoryBoardService = new CategoryBoardServiceImpl();
 		BoardService boardService = new BoardServiceImpl();
+		CategoryService categoryService = new CategoryServiceImpl();
 		
 		int curPage = 0;
+		int categoryNo = 0;
+		String keyword = "";
 		
-		if(request.getAttribute("page") != null) {
-			curPage = (int)request.getAttribute("page");
+		if(request.getParameter("page") != null) {
+			curPage = Integer.parseInt(request.getParameter("page"));
 		} else {
 			curPage  = 1;
 		}
 		
-		int maxBoardNum = categoryBoardService.selectMaxPageNumber();
-		List<SelectCategoryBoardListDto> boardList = boardService.selectCategoryBoardList((curPage - 1) * 10 + 1, curPage * 10);
+		if(request.getParameter("categoryNo") != null) {
+			categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
+		} else {
+			categoryNo  = 1;
+		}
+		
+		request.setAttribute("categoryNo", categoryNo);
+		
+		
+		if(request.getParameter("keyword") != null) {
+			keyword = request.getParameter("keyword");
+		} else {
+			keyword  = "";
+		}
+		
+		int maxBoardNum = categoryBoardService.selectMaxPageNumber(categoryNo, keyword);
+		List<SelectCategoryBoardListDto> boardList = boardService.selectCategoryBoardList((curPage - 1) * 10 + 1, curPage * 10, categoryNo, keyword);
 		System.out.println(boardList);
 		if(request.getAttribute("page") != null) {
 			request.setAttribute("pageing", 
@@ -60,6 +81,9 @@ public class SelectBoardListController extends HttpServlet {
 			request.setAttribute("board", 
 					boardList);
 		}
+		
+		List<Category> categoryList = categoryService.selectCategoryList();
+		request.setAttribute("category", categoryList);
 		
 		request.getRequestDispatcher("views/category/category.jsp").forward(request, response);
 	}

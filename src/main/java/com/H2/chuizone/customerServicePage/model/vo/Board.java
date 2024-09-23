@@ -1,30 +1,38 @@
 package com.h2.chuizone.customerServicePage.model.vo;
 
 public class Board {
-	private String boardNo;
+	private Integer boardNo;
+	private Integer inquiryNo;
 	private String userNo;
-	private String boardType;
+	private String kindOfBoard;
+	private String inquiryGroup;
+	private String inquiryGroupName;
 	private String boardTitle;
 	private String createDate;
 	private String boardContent;
 	private String originFileNames;
 	private String changeFileNames;
+
+	public Board() {}
+
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", userNo=" + userNo + ", boardType=" + boardType + ", boardTitle="
-				+ boardTitle + ", createDate=" + createDate + ", boardContent=" + boardContent + ", originFileNames="
-				+ originFileNames + ", changeFileNames=" + changeFileNames + "]";
+		return "Board [boardNo=" + boardNo + ", inquiryNo=" + inquiryNo + ", userNo=" + userNo + ", kindOfBoard="
+				+ kindOfBoard + ", inquiryGroup=" + inquiryGroup + ", inquiryGroupName=" + inquiryGroupName
+				+ ", boardTitle=" + boardTitle + ", createDate=" + createDate + ", boardContent=" + boardContent
+				+ ", originFileNames=" + originFileNames + ", changeFileNames=" + changeFileNames + "]";
 	}
-	
-	public Board() {};
-	
 
-	public Board(String boardNo, String userNo, String boardType, String boardTitle, String createDate,
-			String boardContent, String originFileNames, String changeFileNames) {
+	public Board(Integer boardNo, Integer inquiryNo, String userNo, String kindOfBoard, String inquiryGroup,
+			String inquiryGroupName, String boardTitle, String createDate, String boardContent, String originFileNames,
+			String changeFileNames) {
 		super();
 		this.boardNo = boardNo;
+		this.inquiryNo = inquiryNo;
 		this.userNo = userNo;
-		this.boardType = boardType;
+		this.kindOfBoard = kindOfBoard;
+		this.inquiryGroup = inquiryGroup;
+		this.inquiryGroupName = inquiryGroupName;
 		this.boardTitle = boardTitle;
 		this.createDate = createDate;
 		this.boardContent = boardContent;
@@ -32,29 +40,20 @@ public class Board {
 		this.changeFileNames = changeFileNames;
 	}
 
-	
-	public String getOriginFileNames() {
-		return originFileNames;
-	}
-
-	public void setOriginFileNames(String originFileNames) {
-		this.originFileNames = originFileNames;
-	}
-
-	public String getBoardType() {
-		return boardType;
-	}
-
-	public void setBoardType(String boardType) {
-		this.boardType = boardType;
-	}
-	
-	public String getBoardNo() {
+	public Integer getBoardNo() {
 		return boardNo;
 	}
 
-	public void setBoardNo(String boardNo) {
+	public void setBoardNo(Integer boardNo) {
 		this.boardNo = boardNo;
+	}
+
+	public Integer getInquiryNo() {
+		return inquiryNo;
+	}
+
+	public void setInquiryNo(Integer inquiryNo) {
+		this.inquiryNo = inquiryNo;
 	}
 
 	public String getUserNo() {
@@ -63,6 +62,30 @@ public class Board {
 
 	public void setUserNo(String userNo) {
 		this.userNo = userNo;
+	}
+
+	public String getKindOfBoard() {
+		return kindOfBoard;
+	}
+
+	public void setKindOfBoard(String kindOfBoard) {
+		this.kindOfBoard = kindOfBoard;
+	}
+
+	public String getInquiryGroup() {
+		return inquiryGroup;
+	}
+
+	public void setInquiryGroup(String inquiryGroup) {
+		this.inquiryGroup = inquiryGroup;
+	}
+
+	public String getInquiryGroupName() {
+		return inquiryGroupName;
+	}
+
+	public void setInquiryGroupName(String inquiryGroupName) {
+		this.inquiryGroupName = inquiryGroupName;
 	}
 
 	public String getBoardTitle() {
@@ -89,6 +112,14 @@ public class Board {
 		this.boardContent = boardContent;
 	}
 
+	public String getOriginFileNames() {
+		return originFileNames;
+	}
+
+	public void setOriginFileNames(String originFileNames) {
+		this.originFileNames = originFileNames;
+	}
+
 	public String getChangeFileNames() {
 		return changeFileNames;
 	}
@@ -96,5 +127,6 @@ public class Board {
 	public void setChangeFileNames(String changeFileNames) {
 		this.changeFileNames = changeFileNames;
 	}
+
 	
 }

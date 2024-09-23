@@ -1,5 +1,10 @@
+<%@page import="com.h2.chuizone.calender.model.dto.CalenderDto"%>
+<%@page import="com.h2.chuizone.common.reply.model.dto.ReplyDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -158,109 +163,99 @@
     #section-border-comment-reply {
         margin: 0px 10px 0px 10px;
     }
+    
+    #section-modify-delete {
+    	width: 85%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+	}
+	
+	.btn-style {
+		border: none;
+		font-size: 20pt;
+		font-weight: 900;
+		border-radius: 10px;
+		margin: 10px;
+	}
+	
+	.btn-modify {
+		background-color: rgb(234, 221, 255);
+	}
+
+	.btn-delete {
+		background-color: rgb(255, 108, 108);
+		color: white;
+	}
 </style>
 </head>
 <body>
+<%
+	request.setCharacterEncoding("utf-8");
+
+	ObjectMapper mapper = new ObjectMapper();
+	
+	List<ReplyDto> reply = (List<ReplyDto>)request.getAttribute("reply");
+	String jsonReply = mapper.writeValueAsString(reply);
+	
+	CalenderDto board_data = (CalenderDto) request.getAttribute("board_data");
+	String jsonBoard = mapper.writeValueAsString(board_data);
+%>
+<jsp:include page="../common/header.jsp" />
     <div class="calender-view-frame">
+    	<c:if test="${owner == true}">
+	    	<div id="section-modify-delete">
+				<button class="btn-style btn-modify" onclick="updatePost();">수정</button>
+				<button class="btn-style btn-delete" onclick="removePost();">삭제</button>
+			</div>
+		</c:if>
+		
+		<form action="" method="post" id="postForm">
+			<input type="hidden" name="boardNo" value="${ board_data.boardNo }">
+			<input type="hidden" name="categoryBoardNo" value="${ board_data.categoryBoardNo }">
+			<input type="hidden" name="clubName" value="${ clubName }">
+		</form>
+			
         <div class="calender-view-area">
             <div class="calender-view-title">캘린더 일정 상세보기</div>
             
             <div class="calender-view-title-area">
                 <div class="calender-view-title-sector">
-                    <div class="calender-view-title-content">제목</div>
+                    <div class="calender-view-title-content">${ board_data.title }</div>
                     <div class="display-flex-style">
                         <div class="padding-ten-pixel">날짜</div>
-                        <div class="padding-ten-pixel">XXXX.XX.XX ~ XXXX.XX.XX</div>
+                        <div class="padding-ten-pixel">${ board_data.startDate } ~ ${ board_data.endDate }</div>
                     </div>
                 </div>
                 
                 <div class="calender-view-content">
-                    <div class="padding-ten-pixel">내용</div>
+                    <div class="padding-ten-pixel">${ board_data.content }</div>
                 </div>
             </div>
             
-            
-            <div id="section-border-comment-reply">
-                <div class="reply-area-style first-border-reply">
-                    <div class="comment-reply-style">
-                        <div class="reply-nicname-area-style">
-                            <span id="no-reply-margin">닉네임</span>
-                        </div>
-                        <div id="modify-delete-reply">
-                            <a href="#">수정</a> <a href="#">삭제</a> <a href="#">답글</a>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="reply-content-style">댓글 내용</p>
-                    </div>
-                </div>
-                
-                <div class="reply-area-style no-border-reply">
-                    <div class="comment-reply-style">
-                        <div class="reply-nicname-area-style">
-                            &emsp;<p class="reply-icon"></p>
-                            <span>닉네임</span>
-                        </div>
-                        <div id="modify-delete-reply">
-                            <a href="#">수정</a> <a href="#">삭제</a> <a href="#">답글</a>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="reply-content-style reply-icon-style">&emsp;댓글 내용</p>
-                    </div>
-                </div>
-                
-                <div class="reply-area-style top-border-reply">
-                    <div class="comment-reply-style">
-                        <div class="reply-nicname-area-style">
-                            &emsp;&emsp;<p class="reply-icon"></p>
-                            <span>닉네임</span>
-                        </div>
-                        <div id="modify-delete-reply">
-                            <a href="#">수정</a> <a href="#">삭제</a> <a href="#">답글</a>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="reply-content-style reply-icon-style">&emsp;&emsp;댓글 내용</p>
-                    </div>
-                </div>
-                
-                <div class="reply-area-style end-border-reply">
-                    <div class="comment-reply-style">
-                        <div class="reply-nicname-area-style">
-                            <span id="no-reply-margin">닉네임</span>
-                        </div>
-                        <div id="modify-delete-reply">
-                            <a href="#">수정</a> <a href="#">삭제</a> <a href="#">답글</a>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <p class="reply-content-style">댓글 내용 댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</p>
-                    </div>
-                    
-                    <div id="comment-area" class="display-comment">
-                        <p class="reply-icon"></p>
-                        <textarea id="comment-content" placeholder="작성할 댓글을 입력하세요.">
-                        </textarea>
-                        
-                        <button id="btn-reply">댓글 달기</button>
-                    </div>
-                </div>
-
-                <div id="comment-area">
-                    <textarea id="comment-content" placeholder="작성할 댓글을 입력하세요.">
-                    </textarea>
-                    
-                    <button id="btn-reply">댓글 달기</button>
-                </div>
-            </div>
-
-            <div class="btn-frame">
-                <button class="btn-style">취소</button>
-                <button class="btn-style">등록</button>
-            </div>
+            <div id="reply-body">
+				<jsp:include page="../common/reply.jsp">
+					<jsp:param value="<%= jsonReply %>" name="reply" />
+					<jsp:param value="<%= jsonBoard %>" name="board_data" />
+					<jsp:param value="캘린더" name="type" />
+				</jsp:include>
+			</div>
+           
         </div>
     </div>
+    <jsp:include page="../common/footer.jsp" />
+    
+    <script>
+	    function removePost() {
+			document.getElementById('postForm').action = "deleteCalenderBoard.me";
+			document.getElementById('postForm').submit();
+		}
+		
+		function updatePost() {
+			document.getElementById('postForm').action = "updateCalenderBoard.me";
+			document.getElementById('postForm').submit();
+		}
+    </script>
 </body>
 </html>

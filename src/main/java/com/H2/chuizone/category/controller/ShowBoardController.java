@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.h2.chuizone.category.model.dto.SelectCategoryBoardListDto;
 import com.h2.chuizone.category.model.service.CategoryBoardService;
 import com.h2.chuizone.category.model.service.CategoryBoardServiceImpl;
@@ -58,7 +56,6 @@ public class ShowBoardController extends HttpServlet {
 		Member member = (Member)request.getSession().getAttribute("loginUser");
 		
 		if(member != null) {
-			Gson gson = new GsonBuilder().create();
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			request.setAttribute("board_id", board_id);
 			
@@ -71,9 +68,6 @@ public class ShowBoardController extends HttpServlet {
 			
 			ReplyLogic replyLogic = new ReplyLogic();
 			replyLogic.Reply(replyList, dstList, replyLogic.getCommentList(replyList, 0), 1);
-			String jsonReply = gson.toJson(dstList);
-			
-			request.setAttribute("jsonReply", jsonReply);
 			request.setAttribute("reply", dstList);
 
 			if(member.getUserNo() == selectCategoryBoardListDto.getMemberNo()) {
@@ -140,9 +134,6 @@ public class ShowBoardController extends HttpServlet {
 			
 			request.setAttribute("review", reviewList);
 			request.setAttribute("join", isClubId);
-			
-			String jsonBoard = gson.toJson(selectCategoryBoardListDto);
-			request.setAttribute("jsonBoard", jsonBoard);
 			request.setAttribute("board_data", selectCategoryBoardListDto);
 			
 			request.getRequestDispatcher("views/category/category-view.jsp").forward(request, response);

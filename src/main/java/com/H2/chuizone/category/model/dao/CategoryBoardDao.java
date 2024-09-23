@@ -8,8 +8,19 @@ import org.apache.ibatis.session.SqlSession;
 import com.h2.chuizone.category.model.vo.CategoryBoard;
 
 public class CategoryBoardDao {
-	public int selectMaxPageNumber(SqlSession sqlSession) {
-		return sqlSession.selectOne("categoryBoardMapper.selectMaxPageNumber");
+	public int selectMaxPageNumber(SqlSession sqlSession, int categoryNo, String keyword) {
+		Map<String, Object> map = new HashMap<>();
+		
+		if(keyword.isEmpty()) {
+			map.put("categoryNo", categoryNo);
+			
+			return sqlSession.selectOne("categoryBoardMapper.selectMaxPageNumber", map);
+		} else {
+			map.put("categoryNo", categoryNo);
+			map.put("keyword", keyword);
+			
+			return sqlSession.selectOne("categoryBoardMapper.selectMaxPageNumberKeyword", map);
+		}
 	}
 	
 	public int insertCategoryBoard(SqlSession sqlSession, CategoryBoard categoryBoard) {

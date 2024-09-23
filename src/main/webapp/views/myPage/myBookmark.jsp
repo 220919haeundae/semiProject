@@ -7,22 +7,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hobby Harvest</title>
-    
 </head>
     <jsp:include page="myPageNav.jsp"></jsp:include>
         <div class="content">
             <div class="bookmark-list">
             	<c:forEach var="myBookmark" items="${ myBookmarkList }">
-            	<a href="showBoard.me?board_id=${ myBookmark.boardNo }">
+            	
 	                <div class="bookmark-item">
-	                    <img src="img/Icon.jpg" alt="" class="bookmark-icon">
+	                    <img src="views/img/bookmarkicon.png" alt="북마크 아이콘" class="bookmark-icon">
 	                    <img src="img/group1.png" alt="Group Image">
 	                    <div class="bookmark-info">
+	                    <a href="showBoard.me?board_id=${ myBookmark.boardNo }">
 	                        <h3>${ myBookmark.title }</h3>
 	                        <p>${ myBookmark.description }</p>
+	                    </a>
 	                    </div>
 	                </div>
-                </a>
+                
                 </c:forEach>
             </div>
             <c:if test="${pi.maxPage>1 }">
@@ -38,7 +39,6 @@
     </div>
     <!-- Footer -->
     <jsp:include page="../common/footer.jsp"></jsp:include>
-    
     
 </body>
 </html>
