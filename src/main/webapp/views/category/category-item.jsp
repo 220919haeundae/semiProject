@@ -68,7 +68,7 @@
 </style>
 
 </head>
-<body>	
+<body>
 	<c:forEach var="i" begin="0" end="${ pageing.boarderNum - 1 }" >
 		<c:choose>
 			<c:when test="${not empty board[i].boardNo}">

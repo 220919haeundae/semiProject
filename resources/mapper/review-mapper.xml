@@ -34,4 +34,18 @@
 	<select id="selectReviewByRecommand" resultType="int" parameterType="int">
 		SELECT RCNO FROM Review WHERE RVNO = #{reviewNo}
 	</select>
+	
+	<select id="bestReview" resultMap="reviewDtoResultSet">
+		<![CDATA[
+		SELECT ROWNUM, RVNO, MNICKNAME, RCNO, STAR, BTITLE, BCONTENT
+		FROM ( SELECT
+		R.RVNO, M.MNICKNAME, R.RCNO, R.STAR, B.BTITLE, B.BCONTENT FROM BoardReview BR 
+		                             JOIN Board B ON(BR.BNO = B.BNO)
+		                             JOIN Review R ON (R.RVNO = BR.RVNO)
+		                             JOIN Member M ON (M.MNO = B.MNO)
+		                             ORDER BY R.RCNO DESC
+		                             )
+		                             WHERE ROWNUM <= 5
+		]]>
+	</select>
 </mapper>

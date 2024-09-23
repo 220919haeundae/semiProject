@@ -272,4 +272,25 @@
     	JOIN INQUIRY USING(INO)
 	WHERE MNO = #{userNo} AND BNO = #{boardNo}
 	</select>
+
+	<!-- ***************************************************************** -->
+	
+	<select id="bestClub" resultMap="selectCategoryBoardListResultSet">
+	  <![CDATA[
+			 SELECT ROWNUM,  BNO, CBNO, CNAME, CNO, MNICKNAME, MNO, SGNAME, CATENAME, BTITLE, BDATE, BCONTENT, RCNO, COMPLAIN, VIEWS, SCRAP, CBIMG, MAX_COUNT, CUR_COUNT
+     
+		     FROM (SELECT B.BNO, CB.CBNO, CNAME, C.CNO, MNICKNAME, M.MNO, SGNAME, CATENAME, B.BTITLE, B.BDATE, B.BCONTENT, RCNO, COMPLAIN, VIEWS, SCRAP, CBIMG, MAX_COUNT, CUR_COUNT
+			            FROM Board B JOIN BoardCategoryBoard BCB ON (B.BNO = BCB.BNO)
+			                      JOIN CategoryBoard CB ON (CB.CBNO = BCB.CBNO)
+			                      JOIN KindOfBoard KB ON (CB.KBNO = KB.KBNO)
+			                      JOIN Member M ON (B.MNO = M.MNO)
+			                      JOIN Club C ON (C.CNO = CB.CNO)
+			                      JOIN SmallGroupCategory SGC ON (CB.SGCNO = SGC.SGCNO)
+			                      JOIN SmallGroup SG ON (SG.SGNO = SGC.SGNO)
+			                      JOIN Category C ON (C.CATENO = SGC.CATENO)
+			                      WHERE KB.KBNO = 1 AND B.STATUS = 'N' ORDER BY RCNO DESC)
+		    WHERE ROWNUM <=5
+		]]>
+	</select>
+
 </mapper>

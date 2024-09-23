@@ -1,14 +1,17 @@
 package com.h2.chuizone.common;
 
 public class Pageing {
-	private final int boarderNum = 10;
+	private int boarderNum = 10;
 	private final int maxPageingNum = 5;
 	
 	private int maxBoardNum;
 	private int maxPage;
+
 	private int currentPage;	
 	private int stPageingNum;
 	private int endPageingNum;
+	
+	public Pageing() {}
 	
 	public Pageing(int maxBoardNum, int currentPage) {
 		this.maxBoardNum = maxBoardNum;
@@ -64,6 +67,10 @@ public class Pageing {
 
 	public int getBoarderNum() {
 		return boarderNum;
+	}
+	
+	public void setBoarderNum(int boarderNum) {
+		this.boarderNum = boarderNum;
 	}
 
 	public int getMaxPageingNum() {

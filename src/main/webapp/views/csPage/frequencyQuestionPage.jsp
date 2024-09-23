@@ -23,34 +23,29 @@
         
             <h2>자주묻는 질문</h2>
             <div class="flip">
-                <h5>Q. 1</h5>
-                <p>A. 1</p>
+                <h5>Q. 소모임 개설은 어떻게 하나요?</h5>
             </div>
-            <div class="flipa">></div>
+            <div class="flipa">A. 원하는 카테고리와 소분류를 선택하고, 모임에 대한 설명을 기재하여 등록해 주시면 됩니다.</div>
             
             <div class="flip">
-                <h5>Q. 1</h5>
-                <p>A. 1</p>
+                <h5>Q. 카테고리에 속해 있는 소분류를 추가하고 싶어요.</h5>
             </div>
-            <div class="flipa">></div>
+            <div class="flipa">A. 1:1 문의 사항을 통해 건의해 주세요. 취존에서 내부 검토 후 신설해드리겠습니다. </div>
             
             <div class="flip">
-                <h5>Q. 1</h5>
-                <p>A. 1</p>
+                <h5>Q. 가입한 소모임에서 탈퇴하고 싶어요</h5>
             </div>
-            <div class="flipa">></div>
+            <div class="flipa">A. 가입한 소모임 게시글에서 탈퇴하기 버튼을 눌러 주세요. 모임에 대한 리뷰를 등록하면 탈퇴 처리됩니다. 취존의 발전을 위해 여러분들의 다양한 의견을 부탁드립니다!</div>
             
             <div class="flip">
-                <h5>Q. 1</h5>
-                <p>A. 1</p>
+                <h5>Q. 소모임 일정을 확인하고 싶어요.</h5>
             </div>
-            <div class="flipa">></div>
+            <div class="flipa">A. 내가 가입한 소모임 게시글로 이동하여 캘린더 버튼을 눌러 주세요. 소모임 일정을 한눈에 확인할 수 있습니다.</div>
             
             <div class="flip">
-                <h5>Q. 1</h5>
-                <p>A. 1</p>
+                <h5>Q. 아이디/비밀번호를 찾고 싶어요.</h5>
             </div>
-            <div class="flipa">></div>
+            <div class="flipa">A. 로그인 창에서 아이디/비밀번호 찾기를 통해 찾을 수 있습니다. 가입 시 기입한 정보를 통해 찾을 수 있어요.</div>
             
         </div>
     </div>

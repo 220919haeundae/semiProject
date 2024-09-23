@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<jsp:forward page="views/main.jsp" />
+    <jsp:forward page="bestClub" />
 
 </body>
 </html>

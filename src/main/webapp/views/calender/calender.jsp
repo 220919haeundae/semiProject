@@ -62,6 +62,24 @@
     width: 100px; 
     height: 50px;
   }
+  
+  .fc-day a {
+  	color: black;
+  }
+  
+  .fc-day-sun a {
+      color: red;
+  }
+	  
+  .fc-day-sat a {
+      color: blue;
+  }
+  
+  .fc .fc-button-primary { 
+	  color: #FFFFF; 
+	  background-color: #ffb7b7 !important; 
+	  border-color: #ffb7b7 !important; 
+  }
 </style>
 
 </head>
