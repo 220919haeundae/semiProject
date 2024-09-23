@@ -69,7 +69,7 @@ public class SelectBoardListController extends HttpServlet {
 		
 		int maxBoardNum = categoryBoardService.selectMaxPageNumber(categoryNo, keyword);
 		List<SelectCategoryBoardListDto> boardList = boardService.selectCategoryBoardList((curPage - 1) * 10 + 1, curPage * 10, categoryNo, keyword);
-		System.out.println(boardList);
+
 		if(request.getAttribute("page") != null) {
 			request.setAttribute("pageing", 
 									new Pageing(maxBoardNum,  curPage));

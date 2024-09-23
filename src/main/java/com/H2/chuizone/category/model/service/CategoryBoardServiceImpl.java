@@ -68,7 +68,7 @@ public class CategoryBoardServiceImpl implements CategoryBoardService {
 			
 			categoryBoard.setKindOfBoardNo(kindOfBoardId);
 			categoryBoard.setClubNo(clubId);
-			System.out.println(categoryBoard);
+
 			board.setMemberNo(userNo);
 			board.setKindOfBoardNo(kindOfBoardId);
 			resultBoard = boardService.insertBoard(board);

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.h2.chuizone.customerServicePage.model.service.CustomerService;
 import com.h2.chuizone.customerServicePage.model.vo.Board;
+import com.h2.chuizone.member.model.vo.Member;
+import com.h2.chuizone.template.PageInfo;
+import com.h2.chuizone.template.Pagination;
 
 /**
  * Servlet implementation class PiPageController
@@ -31,13 +34,22 @@ public class PersonalInquiryPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userNo = request.getParameter("userNo");
-		System.out.println(userNo);
-		ArrayList<Board> inquiryList = new CustomerService().selectInquiryList(userNo);
+		String userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo() + "";
+		int cpage = 1;
+		if(request.getParameter("cpage") != null) {
+			cpage = Integer.parseInt(request.getParameter("cpage"));
+		}
+		System.out.println(cpage);
+		int inquiryListCount = new CustomerService().inquiryListCount(userNo);
+		System.out.println(inquiryListCount);
+		PageInfo pi = Pagination.getPageInfo(inquiryListCount, cpage, 5, 6);
+		ArrayList<Board> inquiryList = new CustomerService().selectInquiryList(pi, userNo);
 		
 		
 		if(inquiryList != null) {
 			request.setAttribute("inquiryList", inquiryList);
+			System.out.println(inquiryList.size());
+			request.setAttribute("pi", pi);
 			request.getRequestDispatcher("views/csPage/personalInquiryPage.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("views/csPage/personalInquiryPage.jsp").forward(request, response);

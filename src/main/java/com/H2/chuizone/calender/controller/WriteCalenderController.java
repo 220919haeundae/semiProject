@@ -91,10 +91,12 @@ public class WriteCalenderController extends HttpServlet {
 		}
 		
 		if(resultCalender > 0 && resultBoard > 0 && resultBoardCalender > 0 && resultCalenderCategoryBoard > 0) {
-			// 작성 성공
+			
+			request.getSession().setAttribute("alertMsg", "일정을 작성하였습니다.");
 			response.sendRedirect("calender.me?categoryBoardNo=" + categoryBoardNo);
 		} else {
 			// 작성 실패
+			request.getSession().setAttribute("alertMsg", "일정 작성에 실패하였습니다.");
 			response.sendRedirect("calender.me?categoryBoardNo=" + categoryBoardNo);			
 		}
 	}

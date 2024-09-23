@@ -139,7 +139,7 @@
 	%>
 
 	<jsp:include page="../common/header.jsp" />
-	
+	<br><br><br>
     <div class="board-write-frame">
         <div class="board-area">           
         	<div class="board-write-title">게시글 작성</div>
@@ -207,7 +207,7 @@
             </form>
         </div>
     </div>
-    
+    <br><br><br>
     <jsp:include page="../common/footer.jsp" />
     
      <script>    
@@ -224,7 +224,11 @@
         }
 		
         function cancel() {
-        	history.back();
+			let result = confirm("게시물 작성을 그만하겠습니까?");
+        	
+        	if(result) {        		
+        		history.back();
+        	}
         }
         
         function selectCategory(target) {
@@ -274,7 +278,6 @@
         	    // 예전 브라우저
         	    var filename = $(this).val().toString().split('/').pop().split('\\').pop();
         	  }
-				console.log(filename);
         	  $('.border-file-name').val(filename);
         	  $('.border-file-name-span').text(filename);
         	});	

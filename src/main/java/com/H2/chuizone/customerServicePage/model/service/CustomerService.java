@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.h2.chuizone.customerServicePage.model.dao.CustomerServiceDao;
 import com.h2.chuizone.customerServicePage.model.vo.Board;
 import com.h2.chuizone.template.MybatisTemplate;
+import com.h2.chuizone.template.PageInfo;
 
 public class CustomerService {
 
@@ -27,10 +28,23 @@ public class CustomerService {
 	}
 
 
-	public ArrayList<Board> selectInquiryList(String userNo) {
+	public ArrayList<Board> selectInquiryList(PageInfo pi, String userNo) {
 		SqlSession sqlSession = MybatisTemplate.getSqlSession();
 		
-		return new CustomerServiceDao().selectInquiryList(sqlSession, userNo);
+		return new CustomerServiceDao().selectInquiryList(sqlSession, pi, userNo);
+	}
+
+
+	public Board selectInquiry(String userNo, String boardNo) {
+		SqlSession sqlSession = MybatisTemplate.getSqlSession();
+		
+		return new CustomerServiceDao().selectInquiry(sqlSession, userNo, boardNo);
+	}
+
+
+	public int inquiryListCount(String userNo) {
+		SqlSession sqlSession = MybatisTemplate.getSqlSession();
+		return new CustomerServiceDao().inquiryListCount(sqlSession, userNo);
 	}
 
 }

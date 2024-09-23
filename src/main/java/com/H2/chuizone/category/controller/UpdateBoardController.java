@@ -100,8 +100,11 @@ public class UpdateBoardController extends HttpServlet {
 				String uploadPath = getServletContext().getRealPath("/resources/upload/");
 				FileUploadTemplate.fileUpload(uploadPath+fileName, part);
 			}
+			
+			request.getSession().setAttribute("alertMsg", "게시글 수정하였습니다.");
 			request.getRequestDispatcher("category.me").forward(request, response);
 		} else {
+			request.getSession().setAttribute("alertMsg", "게시글 수정에 실패하였습니다.");
 			request.getRequestDispatcher("category.me").forward(request, response);
 		}
 	}

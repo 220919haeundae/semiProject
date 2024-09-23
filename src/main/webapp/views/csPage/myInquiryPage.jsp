@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,7 @@
 
 </head>
 <body>
+<% String contextPath = request.getContextPath(); %>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div id="bodySection">
 
@@ -35,25 +38,26 @@
 
 			<div class="form-group title-area" style="display: flex; justify-content: space-between;">
 				<label for="title">제목</label>
-				<input type="text" id="title" name="title" class="display-title" style="width:75%" readonly/>
-				<input type="text" id="wdate" name="wdate" class="display-date" value="2024. 09. 07." style="width:20%" readonly/>
+				<input type="text" id="title" name="title" class="display-title" style="width:75%" value="${ myInquiry.boardTitle }" readonly/>
+				<input type="text" id="wdate" name="wdate" class="display-date" value="${ myInquiry.createDate }" style="width:20%" readonly/>
 			</div>
 			<label for="content">내용</label>
+			<c:if test="${ !empty orgFileNames }">
 			<div class="file-output">
 				<span>첨부파일</span>
 				<ul class="scroll-list">
-					<li><a href="#" download="새로운파일이름.pdf">공지사항 첨부파일1</a></li>
-					<li><a href="#" download="새로운파일이름.pdf">공지사항 첨부파일2</a></li>
-					<li><a href="#" download="새로운파일이름.pdf">공지사항 첨부파일3</a></li>
+				<c:forEach var="i" begin="0" end="${fn:length(orgFileNames) - 1}">
+					<li><a  href="<%= contextPath %>/${chgFileNames[i]}" download="${ orgFileNames[i] }">${ orgFileNames[i] }</a></li>
+				</c:forEach>
 				</ul>
-				
 			</div>
+			</c:if>
 			<div class="form-group">
-				<textarea id="content" name="content" class="input-content" readonly></textarea>
+				<textarea id="content" name="content" class="input-content" readonly>${ myInquiry.boardContent }</textarea>
 			</div>
 			<div class="button-group">
-				<button class="cancel-button">삭제</button>
-				<button class="save-button">수정</button>
+				<button class="cancel-button" onclick="deleteInquiry(${myInquiry.boardNo})">삭제</button>
+				<button class="save-button" onclick="modifyInquiry(${myInquiry.boardNo})">수정</button>
 			</div>
 
 
@@ -61,5 +65,16 @@
 
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	<script>
+		function deleteInquiry(boardNo) {
+			
+			location.href="" + boardNo
+		}
+		function modifyInquiry(boardNo) {
+			location.href="" + boardNo
+		}
+	</script>
+	
 </body>
 </html>

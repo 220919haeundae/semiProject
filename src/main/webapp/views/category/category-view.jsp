@@ -1,6 +1,7 @@
 <%@page import="com.h2.chuizone.common.reply.model.dto.ReplyDto"%>
 <%@page import="com.h2.chuizone.common.review.model.dto.ReviewDto"%>
-<%@page import="com.h2.chuizone.category.model.dto.SelectCategoryBoardListDto"%>
+<%@page
+	import="com.h2.chuizone.category.model.dto.SelectCategoryBoardListDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -56,7 +57,7 @@
 	margin: 10px 0px;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: left;
+	justify-content: flex-end;
 }
 
 .star-rating {
@@ -318,7 +319,7 @@
 
 .action-item-batch {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 
 #review-context {
@@ -439,7 +440,7 @@
 .board-img-title {
 	padding: 5px;
 	width: 100%;
-	height: 100%; 
+	height: 100%;
 }
 </style>
 </head>
@@ -448,10 +449,10 @@
 	request.setCharacterEncoding("utf-8");
 
 	ObjectMapper mapper = new ObjectMapper();
-	List<ReviewDto> review = (List<ReviewDto>)request.getAttribute("review");
+	List<ReviewDto> review = (List<ReviewDto>) request.getAttribute("review");
 	String jsonReview = mapper.writeValueAsString(review);
 
-	List<ReplyDto> reply = (List<ReplyDto>)request.getAttribute("reply");
+	List<ReplyDto> reply = (List<ReplyDto>) request.getAttribute("reply");
 	String jsonReply = mapper.writeValueAsString(reply);
 
 	SelectCategoryBoardListDto board_data = (SelectCategoryBoardListDto) request.getAttribute("board_data");
@@ -475,7 +476,8 @@
 			</form>
 
 			<div id="section-main-image">
-				<img class="board-img-title" src="${ board_data.categoryBoardImage}" alt="틀린이미지">
+				<img class="board-img-title" src="${ board_data.categoryBoardImage}"
+					alt="틀린이미지">
 			</div>
 
 			<div id="section-content">
@@ -485,112 +487,130 @@
 				</div>
 				<div id="content">${ board_data.boardContent }</div>
 			</div>
+			<div style="display: flex; justify-content: space-between;">
+				<div class="action-item-batch">
+					<div id="section-border-info">
+						<c:choose>
+							<c:when test="${ recommandImg eq true }">
+								<div class="icon-btn-style icon-favorite">
+									<div class="border-info-icon-style" id="recommand"
+										onclick="boardRecommand();">${ board_data.recommandNo }</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="icon-btn-style icon-unfavorite">
+									<div class="border-info-icon-style" id="recommand"
+										onclick="boardRecommand();">${ board_data.recommandNo }</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</div>
 
-			<div class="action-item-batch">
-				<div id="section-border-info">
+					<div id="section-border-info">
+						<div class="icon-btn-style icon-comment-reply">
+							<div class="border-info-icon-style" id="replyCount">${fn:length(reply)}</div>
+						</div>
+					</div>
+
+					<div id="section-border-info">
+						<c:choose>
+							<c:when test="${ complainImg eq true }">
+								<div class="icon-btn-style icon-declaration">
+									<div class="border-info-icon-style" id="complain"
+										onclick="boardComplain();">${ board_data.complain }</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="icon-btn-style icon-undeclaration">
+									<div class="border-info-icon-style" id="complain"
+										onclick="boardComplain();">${ board_data.complain }</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+
+					<div id="section-border-info">
+						<c:choose>
+							<c:when test="${ scrapImg eq true }">
+								<div class="icon-style icon-book-mark" id="scrap"
+									onclick="boardScrap();"></div>
+							</c:when>
+							<c:otherwise>
+								<div class="icon-style icon-unbook-mark" id="scrap"
+									onclick="boardScrap();"></div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+
+				<div id="section-group-behavior">
 					<c:choose>
-						<c:when test="${ recommandImg eq true }">
-							<div class="icon-btn-style icon-favorite">
+						<c:when test="${ join == true }">
+							<div class="icon-btn-style icon-calender"
+								onclick="goToCalender();"></div>
 						</c:when>
 						<c:otherwise>
-							<div class="icon-btn-style icon-unfavorite">
 						</c:otherwise>
 					</c:choose>
 
-					<div class="border-info-icon-style" id="recommand"
-						onclick="boardRecommand();">${ board_data.recommandNo }</div>
+					<div class="icon-btn-style number-of-people" id="headCount">${ board_data.currentCount }
+						/ ${ board_data.maxCount }</div>
+					<c:choose>
+						<c:when test="${ join == true }">
+							<button class="btn-joinable-style btn-unjoin" id="btn-unjoin"
+								onclick="quit();">탈퇴하기</button>
+						</c:when>
+						<c:otherwise>
+							<button class="btn-joinable-style btn-join" id="btn-join"
+								onclick="join();">참여하기</button>
+						</c:otherwise>
+					</c:choose>
 				</div>
-				<div class="icon-btn-style icon-comment-reply">
-					<div class="border-info-icon-style" id="replyCount">${fn:length(reply)}</div>
+			</div>
+		</div>
+
+		<div id="reply-body">
+			<jsp:include page="../common/reply.jsp">
+				<jsp:param value="<%=jsonReply%>" name="reply" />
+				<jsp:param value="<%=jsonBoard%>" name="board_data" />
+				<jsp:param value="카테고리" name="type" />
+			</jsp:include>
+		</div>
+
+		<div id="section-group-review">
+			<div class="top-style review-area">
+				<div class="inner-content-style">모임원의 리뷰</div>
+			</div>
+
+			<div class="bottom-style" id="padding-for-review">
+				<div id="review-content">
+					<c:choose>
+						<c:when test="${fn:length(review) > 0}">
+							<jsp:include page="category-review-item.jsp">
+								<jsp:param value="${ index }" name="id" />
+								<jsp:param value="${ review[index].reviewNo }" name="reviewId" />
+								<jsp:param value="${ review[index].memberName }"
+									name="memberName" />
+								<jsp:param value="${ review[index].recommandNo }"
+									name="recommandNo" />
+								<jsp:param value="${ review[index].content }" name="content" />
+								<jsp:param value="${ review[index].starNo }" name="starNo" />
+								<jsp:param value="${ review[index].recommandFlag }"
+									name="recommandFlag" />
+							</jsp:include>
+						</c:when>
+						<c:otherwise>
+							<div class="review-header">리뷰가 없습니다.</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
-				<c:choose>
-					<c:when test="${ complainImg eq true }">
-						<div class="icon-btn-style icon-declaration">
-					</c:when>
-					<c:otherwise>
-						<div class="icon-btn-style icon-undeclaration">
-					</c:otherwise>
-				</c:choose>
-				<div class="border-info-icon-style" id="complain"
-					onclick="boardComplain();">${ board_data.complain }</div>
+				<div class="icon-btn-style more-content" onclick="reviewMoreView();">더보기</div>
 			</div>
-			<c:choose>
-				<c:when test="${ scrapImg eq true }">
-					<div class="icon-style icon-book-mark" id="scrap"
-						onclick="boardScrap();"></div>
-				</c:when>
-				<c:otherwise>
-					<div class="icon-style icon-unbook-mark" id="scrap"
-						onclick="boardScrap();"></div>
-				</c:otherwise>
-			</c:choose>
 
-		</div>
-
-		<div id="section-group-behavior">
-			<c:choose>
-				<c:when test="${ join == true }">
-					<div class="icon-btn-style icon-calender" onclick="goToCalender();"></div>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
-
-			<div class="icon-btn-style number-of-people" id="headCount">${ board_data.currentCount }
-				/ ${ board_data.maxCount }</div>
-			<c:choose>
-				<c:when test="${ join == true }">
-					<button class="btn-joinable-style btn-unjoin" id="btn-unjoin"
-						onclick="quit();">탈퇴하기</button>
-				</c:when>
-				<c:otherwise>
-					<button class="btn-joinable-style btn-join" id="btn-join"
-						onclick="join();">참여하기</button>
-				</c:otherwise>
-			</c:choose>
 		</div>
 	</div>
-
-	<div id="reply-body">
-		<jsp:include page="../common/reply.jsp">
-			<jsp:param value="<%= jsonReply %>" name="reply" />
-			<jsp:param value="<%= jsonBoard %>" name="board_data" />
-			<jsp:param value="카테고리" name="type" />
-		</jsp:include>
-	</div>
-
-	<div id="section-group-review">
-		<div class="top-style review-area">
-			<div class="inner-content-style">모임원의 리뷰</div>
-		</div>
-
-		<div class="bottom-style" id="padding-for-review">
-			<div id="review-content">
-				<c:choose>
-					<c:when test="${fn:length(review) > 0}">
-						<jsp:include page="category-review-item.jsp">
-							<jsp:param value="${ index }" name="id" />
-							<jsp:param value="${ review[index].reviewNo }" name="reviewId" />
-							<jsp:param value="${ review[index].memberName }"
-								name="memberName" />
-							<jsp:param value="${ review[index].recommandNo }"
-								name="recommandNo" />
-							<jsp:param value="${ review[index].content }" name="content" />
-							<jsp:param value="${ review[index].starNo }" name="starNo" />
-							<jsp:param value="${ review[index].recommandFlag }"
-								name="recommandFlag" />
-						</jsp:include>
-					</c:when>
-					<c:otherwise>
-						<div class="review-header">리뷰가 없습니다.</div>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<div class="icon-btn-style more-content" onclick="reviewMoreView();">더보기</div>
-		</div>
-
-	</div>
-
+	
+	<br><br><br>
 	<jsp:include page="../common/footer.jsp" />
 
 	<script>		
@@ -602,33 +622,45 @@
     	}
     	
     	function join() {
-    		$.ajax({
-    			url: "joinClub.me",
-    			method: "POST",
-    			data: {
-    				boardNo: <%=request.getParameter("board_id")%>
-    			},
-    			success: function(result) {    	    		
-    				$('#headCount').text("${ board_data.currentCount + 1 } / ${ board_data.maxCount }");
-    				$('#btn-join').remove();
-    				$('#headCount').before('<div class="icon-btn-style icon-calender" onclick="goToCalender();"></div>');
-    	    		$('#section-group-behavior').append('<button class="btn-joinable-style btn-unjoin" id="btn-unjoin" onclick="quit();">탈퇴하기</button>');    	    		
-    			},
-    			error: function (err) {
-    				console.log(err);
-    			},
-    			complete: function () {
-    			}
-    		});
+    		let joinResult = confirm("소모임에 참여 하시겠습니까?");
+    		
+    		if(joinResult) {
+    			$.ajax({
+        			url: "joinClub.me",
+        			method: "POST",
+        			data: {
+        				boardNo: <%=request.getParameter("board_id")%>
+        			},
+        			success: function(result) {    	    		
+        				$('#headCount').text("${ board_data.currentCount + 1 } / ${ board_data.maxCount }");
+        				$('#btn-join').remove();
+        				$('#headCount').before('<div class="icon-btn-style icon-calender" onclick="goToCalender();"></div>');
+        	    		$('#section-group-behavior').append('<button class="btn-joinable-style btn-unjoin" id="btn-unjoin" onclick="quit();">탈퇴하기</button>');    	    		
+        			},
+        			error: function (err) {
+        				console.log(err);
+        			},
+        			complete: function () {
+        			}
+        		});	
+    		}
     	}
     	
-    	function quit() {    		
-    		location.href="review.me?boardNo=" + <%=request.getParameter("board_id")%>;
+    	function quit() { 
+    		let unJoinResult = confirm("소모임에 탈퇴 하시겠습니까?");
+    		
+    		if(unJoinResult) {
+    			location.href="review.me?boardNo=" + <%=request.getParameter("board_id")%>;	
+    		}
     	}
     	
     	function removePost() {
-    		document.getElementById('postForm').action = "deleteCategoryBoard.me";
-    		document.getElementById('postForm').submit();
+    		let removeResult = confirm("게시글을 삭제 하시겠습니까?");
+    		
+    		if(removeResult) {    			
+	    		document.getElementById('postForm').action = "deleteCategoryBoard.me";
+	    		document.getElementById('postForm').submit();
+    		}
     	}
     	
     	function updatePost() {
@@ -654,12 +686,15 @@
                         recommandFlag: reviews[${indexCount}].recommandFlag
                     },
                     success: function(data) {
-                        $('#review-content').append(data);
+                    	$('#review-content').append(data);	
+
                     },
                     error: function(status, error) {
                         console.error('AJAX 요청 오류:', status, error);
                     }
                 });	
+    		} else {
+    			alert("더이상 리뷰가 없습니다.");
     		}
     	}
     	

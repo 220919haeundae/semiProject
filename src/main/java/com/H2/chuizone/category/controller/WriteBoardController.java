@@ -89,7 +89,13 @@ public class WriteBoardController extends HttpServlet {
 					String uploadPath = getServletContext().getRealPath("/resources/upload/");
 					FileUploadTemplate.fileUpload(uploadPath+fileName, part);
 				}
+				
+				request.getSession().setAttribute("alertMsg", "게시물을 작성 하였습니다.");
+			} else {
+				request.getSession().setAttribute("alertMsg", "게시물을 작성에 실패 하였습니다.");
 			}
+		} else {
+			request.getSession().setAttribute("alertMsg", "게시물을 작성에 실패 하였습니다.");
 		}
         
 		request.getRequestDispatcher("/").forward(request, response);

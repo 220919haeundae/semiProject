@@ -40,10 +40,10 @@ public class ReviewRecommandController extends HttpServlet {
 		Member member = (Member)request.getSession().getAttribute("loginUser");
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		int result = memberReviewRecommandService.selectMemberReviewRecommand(reviewNo, member.getUserNo());
-		
+
 		if(result > 0) {
-			int resultMemberReviewRecommand = memberReviewRecommandService.deleteMemberReviewRecommand(reviewNo, result);
-			
+			int resultMemberReviewRecommand = memberReviewRecommandService.deleteMemberReviewRecommand(reviewNo, member.getUserNo());
+
 			if(resultMemberReviewRecommand > 0) {
 				int recommandNo = reviewService.selectReviewByRecommand(reviewNo);
 				int recommandUpdate = reviewService.updateReview(recommandNo - 1, reviewNo);

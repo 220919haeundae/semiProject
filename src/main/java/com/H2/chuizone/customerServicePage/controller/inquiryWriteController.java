@@ -89,11 +89,11 @@ public class InquiryWriteController extends HttpServlet {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				if(!originFileName.isEmpty() && !changeFileName.isEmpty() ) {
 					originFileNames.append(originFileName);
 					originFileNames.append(",");
-					changeFileNames.append(path + changeFileName); // 저장된 물리경로 + 변환된 첨부파일명
+					changeFileNames.append("resources/uploadFiles/" + changeFileName); // 저장된 물리경로 + 변환된 첨부파일명
 					changeFileNames.append(",");
 				}
 				
@@ -123,8 +123,9 @@ public class InquiryWriteController extends HttpServlet {
 		
 		
 		if(result > 0) {
+			request.setAttribute("userNo", userNo);
 			request.getSession().setAttribute("alertMsg", "요청이 성공적으로 전달되었습니다.");
-			request.getRequestDispatcher("views/csPage/personalInquiryPage.jsp").forward(request, response);
+			request.getRequestDispatcher("toPiPage.do").forward(request, response);
 		} else {
 			request.getSession().setAttribute("alertMsg", "1:1문의 게시에 실패했습니다. 다시 시도해주세요.");
 			request.getRequestDispatcher("views/csPage/personalInquiryPage.jsp").forward(request, response);

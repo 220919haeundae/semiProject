@@ -72,7 +72,7 @@
 	<c:forEach var="i" begin="0" end="${ pageing.boarderNum - 1 }" >
 		<c:choose>
 			<c:when test="${not empty board[i].boardNo}">
-				<div id="board" onclick="showBoard(${board[i].boardNo}, ${pageing.currentPage});">
+				<div id="board" onclick="showBoard(${board[i].boardNo});">
 					<div id="board-img">
 						<img class="board-img" src="${board[i].categoryBoardImage}">
 					</div>
@@ -118,9 +118,7 @@
 	</c:forEach>
 
 	<script>
-		function showBoard(id, page) {
-			console.log(id);
-			console.log(page);
+		function showBoard(id) {
 			location.href="/hobbyharvest/showBoard.me?board_id=" + id;
 		}
 	</script>

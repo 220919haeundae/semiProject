@@ -244,12 +244,17 @@
            
         </div>
     </div>
+    <br><br><br>
     <jsp:include page="../common/footer.jsp" />
     
     <script>
 	    function removePost() {
-			document.getElementById('postForm').action = "deleteCalenderBoard.me";
-			document.getElementById('postForm').submit();
+			let removeResult = confirm("일정을 삭제 하시겠습니까?");
+    		
+    		if(removeResult) {    
+				document.getElementById('postForm').action = "deleteCalenderBoard.me";
+				document.getElementById('postForm').submit();
+    		}
 		}
 		
 		function updatePost() {

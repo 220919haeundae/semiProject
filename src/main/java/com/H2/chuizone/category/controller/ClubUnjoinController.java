@@ -100,8 +100,10 @@ public class ClubUnjoinController extends HttpServlet {
 			}
 			
 			if(result > 0 && resultCategory > 0) {
+				request.getSession().setAttribute("alertMsg", "리뷰를 작성 하였습니다.");
 				response.sendRedirect(request.getContextPath());
 			} else {
+				request.getSession().setAttribute("alertMsg", "리뷰작성에 실패 하였습니다.");
 				response.sendRedirect(request.getContextPath() + "/showBoard.me?board_id=" + boardNo);
 			}
 		}

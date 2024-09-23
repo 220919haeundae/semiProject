@@ -179,7 +179,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	
+	<br><br><br>
 	<form id="review-my-form" action="unjoinClub.me" method="post">
 	    <div class="review-write-frame">
 	        <div class="review-area">
@@ -236,7 +236,7 @@
 	        </div>
 	    </div>
     </form>
-    
+    <br><br><br>
     <jsp:include page="../common/footer.jsp" />
     
      <script>
@@ -258,7 +258,11 @@
         });
         
         function reviewCancel() {
-        	history.back();
+			let result = confirm("리뷰 작성을 그만하겠습니까?");
+        	
+        	if(result) {
+        		history.back();
+        	}
         }
     </script>
 </body>

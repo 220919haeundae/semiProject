@@ -65,11 +65,13 @@ public class UpdateCalenderController extends HttpServlet {
 			request.setAttribute("categoryBoardNo", categoryBoardNo);
 			request.setAttribute("clubName", clubName);
 			
+			request.getSession().setAttribute("alertMsg", "일정을 수정하였습니다.");
 			request.getRequestDispatcher("calender.me").forward(request, response);
 		} else {
 			request.setAttribute("categoryBoardNo", categoryBoardNo);
 			request.setAttribute("clubName", clubName);
 			
+			request.getSession().setAttribute("alertMsg", "일정 수정에 실패 하였습니다.");
 			request.getRequestDispatcher("calender.me").forward(request, response);
 		}
 	}

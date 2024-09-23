@@ -111,7 +111,8 @@
 
 </head>
 <body>
-<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/header.jsp" />
+	<br><br><br>
 	<form id="my-form" action="updateCalender.me" method="post">
 	    <div class="calender-write-frame">
 	        <div class="calender-write-area" >
@@ -149,6 +150,7 @@
 	        </div>
 	    </div>
     </form>
+    <br><br><br>
     <jsp:include page="../common/footer.jsp" />
     
     <script>
@@ -165,7 +167,11 @@
 	    }
 	    
 	    function cancel() {
-	    	location.href = "calender.me?categoryBoardNo=" + ${ categoryBoardNo } + "&clubName=" + '${ clubName }';
+			let result = confirm("일정 수정을 그만하겠습니까?");
+        	
+        	if(result) {
+	    		location.href = "calender.me?categoryBoardNo=" + ${ categoryBoardNo } + "&clubName=" + '${ clubName }';
+        	}
 	    }
 	    
 	 	// 폼 제출 시 prepareFormData 함수 호출

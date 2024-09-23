@@ -24,7 +24,7 @@ public class MemberReviewRecommandDao {
 		Map<String, Integer> map = new HashMap<>();
 		map.put("reviewNo", reviewNo);
 		map.put("memberNo", memberNo);
-		
+
 		return sqlSession.delete("memberReviewRecommandMapper.deleteMemberReviewRecommand", map);
 	}
 }

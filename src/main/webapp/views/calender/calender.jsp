@@ -76,6 +76,7 @@
 	String jsonCalender = mapper.writeValueAsString(calender);
 %>
 <jsp:include page="../common/header.jsp" />
+<br><br><br>
     <div class="calender-frame">
         <div class="calender-content-frame">
             <div class="calender-title">[ <%= request.getAttribute("clubName") %> 모임 캘린더 ]</div>
@@ -84,6 +85,7 @@
             </div>
         </div>
     </div>
+<br><br><br>
 <jsp:include page="../common/footer.jsp" />
     <script>
     	let calender = <%= jsonCalender %>;
@@ -122,19 +124,15 @@
               dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
               locale: 'ko', // 한국어 설정
               eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
-                console.log(obj);
               },
               eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
-                console.log(obj);
               },
               eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
-                console.log(obj);
               },
               select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
                 <!-- var title = prompt('Event Title:'); -->
                 location.href = "calenderWrite.me?categoryBoardNo="+<%= request.getAttribute("categoryBoardNo")%>+
                 		"&startDate=" + arg.startStr + "&endDate=" + arg.endStr + "&clubName=" + '<%= request.getAttribute("clubName") %>';
-                console.log(arg);
                 if (title) {
                   calendar.addEvent({
                     title: title,

@@ -37,7 +37,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<c:choose>
 			<c:when test="${ param.recommandFlag eq true }">
 				<div class="icon-btn-style icon-recommand" onclick="recommand(${ param.reviewId }, ${ param.id });">

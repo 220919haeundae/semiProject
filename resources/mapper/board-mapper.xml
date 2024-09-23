@@ -228,14 +228,26 @@
 	
 	
 	<!-- ***************************************************************** -->
-	<resultMap id ="inquirySet" type="BoardLy">
+	<!-- 1:1문의 리스트 갯수 조회 -->
+	<select id="inquiryListCount" resultType="_int">
+		SELECT COUNT(*) COUNT
+		FROM INQUIRY_BOARD
+    		LEFT JOIN INQUIRY USING(INO)
+    		LEFT JOIN BOARD USING(BNO)
+    		JOIN INQUIRYGROUP USING (IGNO)
+		WHERE MNO = #{userNo} AND STATUS = 'N'
+	</select>
+	
+	
+	<!--  1:1 문의 리스트 조회 -->
+	<resultMap id ="inquiryListSet" type="BoardLy">
 		<result column="bno" property="boardNo"/>
 		<result column="btitle" property="boardTitle"/>
 		<result column="bdate" property="createDate"/>
 		<result column="bcontent" property="boardContent"/>
 		<result column="kind_of_inquiry" property="inquiryGroupName"/>
 	</resultMap>
-	<select id="selectInquiryList" resultMap="inquirySet">
+	<select id="selectInquiryList" resultMap="inquiryListSet">
 		SELECT BNO, BTITLE, TO_CHAR(BDATE, 'YY-MM-DD') BDATE, BCONTENT, KIND_OF_INQUIRY
 		FROM INQUIRY_BOARD
     		LEFT JOIN INQUIRY USING(INO)
@@ -244,4 +256,20 @@
 		WHERE MNO = #{userNo} AND STATUS = 'N'
 	</select>
 	
+	<!-- 1:1문의 상세페이지 데이터 조회 -->
+	<resultMap id="inquirySet" type="boardLy">
+		<result column="bno" property="boardNo"/>
+		<result column="btitle" property="boardTitle"/>
+		<result column="bdate" property="createDate"/>
+		<result column="orgfilenames" property="originFileNames"/>
+		<result column="chgfilenames" property="changeFileNames"/>
+		<result column="bcontent" property="boardContent"/>
+	</resultMap>
+	<select id="selectInquiry" resultMap="inquirySet" parameterType="hashmap">
+	SELECT BNO, BTITLE, BDATE, ORGFILENAMES, CHGFILENAMES, BCONTENT
+	FROM INQUIRY_BOARD
+    	JOIN BOARD USING(BNO)
+    	JOIN INQUIRY USING(INO)
+	WHERE MNO = #{userNo} AND BNO = #{boardNo}
+	</select>
 </mapper>
