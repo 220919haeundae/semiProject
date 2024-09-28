@@ -36,7 +36,7 @@
 		<typeAlias type="com.h2.chuizone.common.boardcalender.model.vo.BoardCalender" alias="BoardCalender" />
 		<typeAlias type="com.h2.chuizone.common.calendercategoryboard.model.vo.CalenderCategoryBoard" alias="CalenderCategoryBoard" />	
 		<typeAlias type="com.h2.chuizone.calender.model.dto.CalenderDto" alias="CalenderDto" />
-		<typeAlias type="com.h2.chuizone.customerServicePage.model.vo.Board" alias="BoardLy" />
+		<typeAlias type="com.h2.chuizone.customerServicePage.model.dto.InquiryBoardDto" alias="InquiryBoardDto" />
 		<typeAlias type="com.h2.chuizone.customerServicePage.model.vo.InquiryBoard" alias="InquiryBoard" />
 	</typeAliases>
 	<environments default="develop">
@@ -45,8 +45,8 @@
 			<dataSource type="POOLED">
 		    	<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
 		    	<property name="url" value="jdbc:oracle:thin:@cjy951213.iptime.org:1521:xe"/>
-		    	<property name="username" value="TEST"/>
-		    	<property name="password" value="TEST"/>
+		    	<property name="username" value="hobby"/>
+		    	<property name="password" value="harvest"/>
 		    </dataSource>			
 		</environment>
 	</environments>

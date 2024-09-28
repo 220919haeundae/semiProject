@@ -14,24 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 public class CustomerServicePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public CustomerServicePageController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 자주묻는 질문 페이지(frequencyQuestionPage.jsp)로 포워딩, customerServicePage.jsp(고객센터 사이드바)를 include하고 있음
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("views/csPage/frequencyQuestionPage.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

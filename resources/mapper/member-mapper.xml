@@ -48,4 +48,24 @@
 	SET MID = #{userId}, MEMAIL = #{email}, MPHONE = #{phone}, MADDRESS = #{address}
 	WHERE MID = #{userId}
   </update>
+  <select id="searchId" resultType="string">
+		SELECT MID
+		FROM MEMBER
+		WHERE MEMAIL = #{email}
+	</select>
+	
+	<update id="updatePassword">
+		UPDATE MEMBER
+		SET MPW = #{newUserPw}
+		WHERE MID = #{userId} AND MPW = #{userPw}
+	</update>
+	
+	<select id="selectMemberByUserId" resultMap="memberResultSet">
+        SELECT * 
+		  FROM MEMBER
+		 WHERE MID = #{userId}
+	</select>
+	
+	
+	
 </mapper>

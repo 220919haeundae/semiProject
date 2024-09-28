@@ -23,7 +23,7 @@ public class InquiryWritePageController extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 1:1문의 게시글 글쓰기 페이지(inquiryWritePage.jsp)로 포워딩
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("views/csPage/inquiryWritePage.jsp").forward(request, response);

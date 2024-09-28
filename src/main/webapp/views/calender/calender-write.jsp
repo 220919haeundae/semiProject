@@ -118,6 +118,7 @@
 	        <div class="calender-write-area" >
 	            <div class="calender-write-title">캘린더 일정 작성</div>
 				<input type="hidden" name="categoryBoardNo" id="categoryBoardNo" value="<%= request.getParameter("categoryBoardNo") %>">
+				<input type="hidden" name="cboardNo" id="cboardNo" value="<%= request.getParameter("cboardNo") %>">
 				
 	            <div class="calender-write-title-area">
 	                <div class="calender-title">제목</div>
@@ -168,7 +169,7 @@
 			let result = confirm("일정 작성을 그만하겠습니까?");
         	
         	if(result) {  
-	    		location.href = "calender.me?categoryBoardNo=" + ${ categoryBoardNo } + "&clubName=" + '${ clubName }';
+	    		location.href = "calender.me?categoryBoardNo=" + ${ categoryBoardNo } + "&cboardNo=" + ${ cboardNo };
         	}
 	    }
 	    

@@ -5,23 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1문의 작성</title>
-        <link rel="stylesheet" href="http://localhost:8080/hobbyharvest/views/css/iwPage.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="views/css/iwPage.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
@@ -51,9 +40,7 @@
 			<select id="kind-of-inquiry" name="inquiryGroup">
 				<option value="1">계정 관련 문의</option>
 				<option value="2">불편사항 관련 문의</option>
-				<option value="3">...</option>
-				<option value="4">...</option>
-				<option value="5">...</option>
+				<option value="3">소모임 관련 문의</option>
 			</select>
 		</div>
 		<div class="form-group">

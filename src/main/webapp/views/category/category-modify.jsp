@@ -228,6 +228,7 @@
             const hiddenInputTitle = document.getElementById('hidden-title');
 
             // div의 HTML 내용을 가져와서 hidden input 필드에 설정
+
             hiddenInputContent.value = contentDiv.innerHTML;
             hiddenInputTitle.value = titleDiv.innerHTML;
         }

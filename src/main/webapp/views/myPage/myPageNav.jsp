@@ -20,11 +20,7 @@
 	String contextPath = request.getContextPath();
 	%>
 	<!-- Header -->
-	<header>
-		<jsp:include page="../common/header.jsp"></jsp:include>
-	</header>
 
-	<div id="bodySection">
 		<!-- Sidebar -->
 		<div id="side-bar">
 			<ul>
@@ -32,8 +28,7 @@
 				<li><a href="<%=contextPath%>/toMySocial.do" id="toMySocial" >내 모임</a></li>
 				<li><a href="<%=contextPath%>/toMyReply.do" id="toMyComment">내가 작성한 댓글</a></li>
 				<li><a href="<%=contextPath%>/toMyBookmark.do" id="toMyBookmark">북마크</a></li>
-				<li data-bs-toggle="modal" data-bs-target="#deleteMemberModal"><a
-					href="#">회원탈퇴</a></li>
+				<li data-bs-toggle="modal" data-bs-target="#deleteMemberModal"><a href="#">회원탈퇴</a></li>
 			</ul>
 		</div>
 

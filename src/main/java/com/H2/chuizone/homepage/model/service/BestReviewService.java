@@ -12,6 +12,10 @@ public class BestReviewService {
 	
 	BestReviewDao brDao = new BestReviewDao();
 
+	/**
+	 * 베스트 리뷰 노출용 서비스 메소드
+	 * @return TOP 5 리뷰 정보를 담은 Dto 객체
+	 */
 	public ArrayList<Review> bestReview() {
 		SqlSession sqlSession = MybatisTemplate.getSqlSession();
 		

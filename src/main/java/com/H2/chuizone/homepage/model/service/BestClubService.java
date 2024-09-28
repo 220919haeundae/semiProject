@@ -10,7 +10,11 @@ import com.h2.chuizone.template.MybatisTemplate;
 
 public class BestClubService {
 	SqlSession sqlSession = MybatisTemplate.getSqlSession();
-
+	
+	/**
+	 * 베스트 소모임 노출용 서비스 메소드
+	 * @return TOP 5 소모임 정보를 담은 Dto 객체
+	 */
 	public List<SelectCategoryBoardListDto> bestClub() {
 		System.out.println("service test");
 

@@ -112,7 +112,7 @@
     	for(let i of calender) {
     		calenderList.push({
     			title: i.title,
-                url: 'showCalender.me?boardNo=' + i.boardNo + "&clubName=" + '<%= request.getAttribute("clubName") %>', // 클릭시 해당 url로 이동
+                url: 'showCalender.me?boardNo=' + i.boardNo + "&cboardNo=" + '<%= request.getAttribute("boardNo") %>', // 클릭시 해당 url로 이동
                 start: i.startDate,
                 end: i.endDate
     		})
@@ -150,7 +150,7 @@
               select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
                 <!-- var title = prompt('Event Title:'); -->
                 location.href = "calenderWrite.me?categoryBoardNo="+<%= request.getAttribute("categoryBoardNo")%>+
-                		"&startDate=" + arg.startStr + "&endDate=" + arg.endStr + "&clubName=" + '<%= request.getAttribute("clubName") %>';
+                		"&startDate=" + arg.startStr + "&endDate=" + arg.endStr + "&cboardNo=" + '<%= request.getAttribute("boardNo") %>';
                 if (title) {
                   calendar.addEvent({
                     title: title,

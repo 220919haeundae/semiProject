@@ -31,15 +31,15 @@ public class DeleteCalenderBoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		int categoryBoardNo = Integer.parseInt(request.getParameter("categoryBoardNo"));
-		String clubName = request.getParameter("clubName");
+		int cboardNo = Integer.parseInt(request.getParameter("cboardNo"));
 		
 		BoardService boardService = new BoardServiceImpl();
 		boardService.deleteCategoryBoard(boardNo);
 		
 		request.setAttribute("categoryBoardNo", categoryBoardNo);
-		request.setAttribute("clubName", clubName);
+		request.setAttribute("boardNo", cboardNo);
 		
-		request.getRequestDispatcher("calender.me").forward(request, response);
+		response.sendRedirect("calender.me?categoryBoardNo=" + categoryBoardNo + "&boardNo=" + cboardNo);
 	}
 
 	/**

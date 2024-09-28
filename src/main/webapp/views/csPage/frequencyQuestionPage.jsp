@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>자주묻는 질문</title>
-        <link rel="stylesheet" href="http://localhost:8080/hobbyharvest/views/css/csPage.css">
+        <link rel="stylesheet" href="views/css/csPage.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -22,6 +22,7 @@
         <div class="faq">
         
             <h2>자주묻는 질문</h2>
+            
             <div class="flip">
                 <h5>Q. 소모임 개설은 어떻게 하나요?</h5>
             </div>

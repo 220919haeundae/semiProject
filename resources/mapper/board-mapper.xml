@@ -42,7 +42,8 @@
 		<result column="bno" property="boardNo" />
 		<result column="cbimg" property="img" />
 	</resultMap>
-
+	
+	<!-- 내가 스크랩한 게시판 리스트 조회 -->
 	<resultMap id="myBookmarkSet" type="MyBookmark">
 		<result column="bno" property="boardNo" />
 		<result column="btitle" property="title" />
@@ -50,6 +51,7 @@
 		<result column="cbimg" property="img" />
 	</resultMap>
 
+	<!-- 내가 댓글 쓴 게시판 리스트 조회 -->
 	<resultMap id="myReplySet" type="MyReply">
 		<result column="btitle" property="title" />
 		<result column="Rcontent" property="reply" />
@@ -139,7 +141,7 @@
 
 
 
-	<!-- 참여한 소모임 리스트 -->
+	<!-- 참여한 소모임 리스트 조회 -->
 	<select id="selectMySocial" resultMap="mySocialSet">
 		SELECT DISTINCT(BNO),
 		BTITLE, BCONTENT, CBIMG
@@ -154,7 +156,7 @@
 		)
 		ORDER BY BNO
 	</select>
-	<!-- 참여한 소모임 갯수 -->
+	<!-- 참여한 소모임 갯수 조회 -->
 	<select id="selectMySocialCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM
@@ -172,12 +174,12 @@
 
 	<!-- 댓글 작성한 소모임 리스트 -->
 	<select id="myReply" resultMap="myReplySet">
-		SELECT BTITLE, RCONTENT, A.BNO, CBIMG, TO_CHAR(RDATE, 'YYYY-MM-DD') RDATE
+		SELECT B.BTITLE, RCONTENT, A.BNO, CBIMG, TO_CHAR(RDATE, 'YYYY-MM-DD') RDATE
 		FROM REPLY A
 			JOIN BOARD B ON (A.BNO = B.BNO)
 			JOIN BOARDCATEGORYBOARD C ON (B.BNO = C.BNO)
 			JOIN CATEGORYBOARD D ON (C.CBNO = D.CBNO)
-		WHERE A.MNO = #{userNo} AND B.STATUS='N'
+		WHERE A.MNO = #{userNo} AND A.STATUS='N' AND B.STATUS='N'
 	</select>
 	<!-- 댓글 작성한 소모임 갯수 -->
 	<select id="selectMyReplyCount" resultType="_int">
@@ -186,7 +188,7 @@
 			JOIN BOARD B ON (A.BNO = B.BNO)
 			JOIN BOARDCATEGORYBOARD C ON (B.BNO = C.BNO)
 			JOIN CATEGORYBOARD D ON (C.CBNO = D.CBNO)
-		WHERE A.MNO = #{userNo} AND B.STATUS='N'
+		WHERE A.MNO = #{userNo} AND A.STATUS='N' AND B.STATUS='N'
 	</select>
 	<!-- ************************************************************ -->
 
@@ -211,19 +213,19 @@
 	</select>
 	<!-- ************************************************************ -->
 	<!-- 1:1 문의 게시글 삽입/ board -->
-	<insert id="insertInquiryBoard" parameterType="BoardLy" useGeneratedKeys="true" keyColumn="BNO" keyProperty="boardNo" >
+	<insert id="insertInquiryBoard" parameterType="InquiryBoardDto" useGeneratedKeys="true" keyColumn="BNO" keyProperty="boardNo" >
 		INSERT INTO BOARD(BNO, MNO, KBNO, BTITLE, BDATE, BCONTENT)
 		VALUES(SEQ_BNO.NEXTVAL, #{userNo}, #{kindOfBoard}, #{boardTitle}, SYSDATE, #{boardContent})
 	</insert>
 	<!-- 1:1문의 게시글 삽입/ Inquiry -->
-	<insert id="insertInqiryBoardUpfile" parameterType="BoardLy" useGeneratedKeys="true" keyColumn="INO" keyProperty="inquiryNo">
+	<insert id="insertInqiryBoardUpfile" parameterType="InquiryBoardDto" useGeneratedKeys="true" keyColumn="INO" keyProperty="inquiryNo">
 		INSERT INTO INQUIRY(INO, IGNO, KBNO, ORGFILENAMES, CHGFILENAMES)
 		VALUES(SEQ_INO.NEXTVAL, #{inquiryGroup}, #{kindOfBoard}, #{originFileNames}, #{changeFileNames})
 	</insert>
 	<!-- 1:1문의 중간테이블 삽입/InquiryBoard -->
 	<insert id="insertInquiryBoardAll">
-	INSERT INTO INQUIRY_BOARD(BNO, INO)
-		VALUES(#{boardNo}, #{inquiryNo})
+	INSERT INTO BOARDINQUIRY(BINO, BNO, INO)
+		VALUES(SEQ_BINO.NEXTVAL , #{boardNo}, #{inquiryNo})
 	</insert>
 	
 	
@@ -231,7 +233,7 @@
 	<!-- 1:1문의 리스트 갯수 조회 -->
 	<select id="inquiryListCount" resultType="_int">
 		SELECT COUNT(*) COUNT
-		FROM INQUIRY_BOARD
+		FROM BOARDINQUIRY 
     		LEFT JOIN INQUIRY USING(INO)
     		LEFT JOIN BOARD USING(BNO)
     		JOIN INQUIRYGROUP USING (IGNO)
@@ -240,7 +242,7 @@
 	
 	
 	<!--  1:1 문의 리스트 조회 -->
-	<resultMap id ="inquiryListSet" type="BoardLy">
+	<resultMap id ="inquiryListSet" type="InquiryBoardDto">
 		<result column="bno" property="boardNo"/>
 		<result column="btitle" property="boardTitle"/>
 		<result column="bdate" property="createDate"/>
@@ -249,7 +251,7 @@
 	</resultMap>
 	<select id="selectInquiryList" resultMap="inquiryListSet">
 		SELECT BNO, BTITLE, TO_CHAR(BDATE, 'YY-MM-DD') BDATE, BCONTENT, KIND_OF_INQUIRY
-		FROM INQUIRY_BOARD
+		FROM BOARDINQUIRY
     		LEFT JOIN INQUIRY USING(INO)
     		LEFT JOIN BOARD USING(BNO)
     		JOIN INQUIRYGROUP USING (IGNO)
@@ -257,7 +259,7 @@
 	</select>
 	
 	<!-- 1:1문의 상세페이지 데이터 조회 -->
-	<resultMap id="inquirySet" type="boardLy">
+	<resultMap id="inquirySet" type="InquiryBoardDto">
 		<result column="bno" property="boardNo"/>
 		<result column="btitle" property="boardTitle"/>
 		<result column="bdate" property="createDate"/>
@@ -267,7 +269,7 @@
 	</resultMap>
 	<select id="selectInquiry" resultMap="inquirySet" parameterType="hashmap">
 	SELECT BNO, BTITLE, BDATE, ORGFILENAMES, CHGFILENAMES, BCONTENT
-	FROM INQUIRY_BOARD
+	FROM BOARDINQUIRY
     	JOIN BOARD USING(BNO)
     	JOIN INQUIRY USING(INO)
 	WHERE MNO = #{userNo} AND BNO = #{boardNo}

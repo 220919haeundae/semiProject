@@ -50,7 +50,7 @@ public class UpdateCalenderController extends HttpServlet {
 		String endDate = request.getParameter("endDate");
 		String content = request.getParameter("content");
 		String title = request.getParameter("title");
-		String clubName = request.getParameter("clubName");
+		int cboardNo = Integer.parseInt(request.getParameter("cboardNo"));
 		
 		CalenderService calenderService = new CalenderServiceImpl();
 		BoardService boardService = new BoardServiceImpl();
@@ -63,16 +63,16 @@ public class UpdateCalenderController extends HttpServlet {
 		
 		if(resultCalender > 0 && resultBoard > 0) {
 			request.setAttribute("categoryBoardNo", categoryBoardNo);
-			request.setAttribute("clubName", clubName);
+			request.setAttribute("boardNo", cboardNo);
 			
 			request.getSession().setAttribute("alertMsg", "일정을 수정하였습니다.");
-			request.getRequestDispatcher("calender.me").forward(request, response);
+			response.sendRedirect("calender.me?categoryBoardNo=" + categoryBoardNo + "&boardNo=" + cboardNo);
 		} else {
 			request.setAttribute("categoryBoardNo", categoryBoardNo);
-			request.setAttribute("clubName", clubName);
+			request.setAttribute("boardNo", cboardNo);
 			
 			request.getSession().setAttribute("alertMsg", "일정 수정에 실패 하였습니다.");
-			request.getRequestDispatcher("calender.me").forward(request, response);
+			response.sendRedirect("calender.me?categoryBoardNo=" + categoryBoardNo + "&boardNo=" + cboardNo);
 		}
 	}
 

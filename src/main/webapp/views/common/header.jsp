@@ -82,7 +82,7 @@
             font-size: 20px;
             font-weight: 700;
             border-radius: 30px;
-
+			text-decoration: none;
             transition: 0.3s ease-out;
             opacity : 0.9;
 

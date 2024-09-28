@@ -61,7 +61,7 @@
 	            </tr>
 	            <tr>
 	                <th>이메일</th>
-	                <td>example@kh.com</td>
+	                <td>hobbyharvest@kh.com</td>
 	            </tr>
 	            <tr>
 	                <th>고객센터 운영 시간</th>

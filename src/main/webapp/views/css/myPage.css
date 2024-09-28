@@ -71,9 +71,12 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
     width: 90%;
     padding: 30px 30px;
     border-radius: 10px;
-    
 }
 
+#user-info img {
+	 display: block;
+	 margin: auto;
+}
 
 
 .content td {padding-bottom: 5px;}
@@ -89,6 +92,16 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
     overflow: hidden;
 }
 
+.comment-list a {
+	text-decoration: none;	
+}
+
+.comment-list a:hover {
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
 .comment-item {
     display: flex;
     align-items: center;
@@ -102,23 +115,19 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
     overflow: hidden;
 }
 
-.comment-info {
-    margin: 5px;
-}
-
 .comment-item img {
     width: 50px;
     height: 50px;
+    margin-right: 20px;
     border-radius: 50%;
-    margin-right: 10px;
+    border: none;
+    box-shadow: 0px 0px 10px 1px lightgray;
 }
 
 .comment-info h3 {
     margin: 0;
     font-size: 1.1em;
-}
-.comment-info h5 {
-    margin: 0;
+    color: black;
 }
 
 .comment-info p {
@@ -137,6 +146,16 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
     overflow: hidden;
 }
 
+.group-list a:hover {
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.group-list a {
+	text-decoration: none;
+}
+
 .group-item {
     display: flex;
     align-items: center;
@@ -153,13 +172,16 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
 .group-item img {
     width: 50px;
     height: 50px;
+    margin-right: 20px;
     border-radius: 50%;
-    margin-right: 10px;
+    border: none;
+    box-shadow: 0px 0px 10px 1px lightgray;
 }
 
 .group-info h3 {
     margin: 0;
     font-size: 1.1em;
+    color: black;
 }
 
 .group-info p {
@@ -177,6 +199,16 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
     overflow: hidden;
 }
 
+.bookmark-list a:hover {
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bookmark-list a {
+	text-decoration: none;
+}
+
 .bookmark-item {
     display: flex;
     align-items: center;
@@ -190,16 +222,31 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
     overflow: hidden;
 }
 
-.bookmark-item img {
-    width: 20px;
-    height: 25px;
-    border-radius: 3px;
-    margin-right: 10px;
+.bookmark-item {
+    position: relative;
+}
+
+.group-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0px 0px 10px 1px lightgray;
+}
+
+.bookmark-icon {
+    position: absolute;
+    top: 10px;  /* 우측 상단으로부터의 거리 조정 */
+    right: 10px; /* 우측 상단으로부터의 거리 조정 */
+    width: 20px;  /* 북마크 아이콘의 크기 설정 */
+    height: 20px; /* 북마크 아이콘의 크기 설정 */
 }
 
 .bookmark-info h3 {
     margin: 0;
     font-size: 1.1em;
+    color: black;
 }
 
 .bookmark-info p {
@@ -208,15 +255,6 @@ html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
     color: #666;
 }
 
-.bookmark-item {
-    position: relative;
-}
-.bookmark-icon {
-    position: absolute;
-    top: 10px;  /* 우측 상단으로부터의 거리 조정 */
-    right: 10px; /* 우측 상단으로부터의 거리 조정 */
-    width: 20px;  /* 북마크 아이콘의 크기 설정 */
-    height: 20px; /* 북마크 아이콘의 크기 설정 */
-}
+
 
 /* 여기까지 myBookmark */

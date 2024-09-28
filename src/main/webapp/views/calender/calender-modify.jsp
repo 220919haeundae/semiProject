@@ -119,7 +119,7 @@
 	            <div class="calender-write-title">캘린더 일정 작성</div>
 				<input type="hidden" name="categoryBoardNo" id="categoryBoardNo" value="<%= request.getAttribute("categoryBoardNo") %>">
 				<input type="hidden" name="boardNo" id="boardNo" value="<%= request.getAttribute("boardNo") %>">
-				<input type="hidden" name="clubName" id="clubName" value="<%= request.getAttribute("clubName") %>">
+				<input type="hidden" name="cboardNo" id="cboardNo" value="<%= request.getAttribute("cboardNo") %>">
 				
 	            <div class="calender-write-title-area">
 	                <div class="calender-title">제목</div>
@@ -170,7 +170,7 @@
 			let result = confirm("일정 수정을 그만하겠습니까?");
         	
         	if(result) {
-	    		location.href = "calender.me?categoryBoardNo=" + ${ categoryBoardNo } + "&clubName=" + '${ clubName }';
+	    		location.href = "calender.me?categoryBoardNo=" + ${ categoryBoardNo } + "&boardNo=" + ${ cboardNo };
         	}
 	    }
 	    

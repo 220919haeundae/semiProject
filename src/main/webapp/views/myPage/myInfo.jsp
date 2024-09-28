@@ -22,7 +22,10 @@
 			<% request.getSession().removeAttribute("alertMsg"); %>
 		}
 	</script>
-	
+	<header>
+		<jsp:include page="../common/header.jsp"></jsp:include>
+	</header>
+	<div id="bodySection">
     <%@ include file="myPageNav.jsp" %>
     	
         <div class="content">
@@ -36,21 +39,21 @@
                     <td><input type="text" name="userId" value="${ loginUser.userId }" style="border: none;" readonly></td>
                 </tr>
                 <tr>
-                    <td style="padding-left: 10px" > <input type="email" name="email" class="myinfo" value="${ loginUser.email }" style="border: none;" readonly></td>
+                    <td style="padding-left: 10px" > <input type="email" name="email" class="myinfo" value="${ loginUser.email }" style="border: none; width: 300px;" readonly></td>
                 </tr>
                 
                 <tr>
-                    <td style="vertical-align: middle;"><img src="views/img/Smartphone.png" alt=""></td>
-                    <td> <input type="tel" name="phone" class="myinfo" value="${ loginUser.phone }" style="border: none;" readonly></td>
+                    <td style="vertical-align: middle;"><img src="views/img/Smartphone.png" alt="" style=""></td>
+                    <td> <input type="tel" name="phone" class="myinfo" value="${ loginUser.phone }" style="border: none; width: 300px;" readonly></td>
                 </tr>
                 <tr>
                     <td style="vertical-align: middle;"><img src="views/img/address.png" alt=""></td>
-                    <td><input type="text" name="address" class="myinfo" value="${ loginUser.address }" style="border: none;" readonly></td>
+                    <td><input type="text" name="address" class="myinfo" value="${ loginUser.address }" style="border: none; width: 300px;" readonly></td>
                 </tr>
             </table>
         </div>
         
-        <div style="margin-top: 10px;"><button type="button" class="btn modify" style="margin-left: 80%; box-shadow: 0px 3px 5px gray;" onclick="modify();">내 정보 수정</button></div>
+        <div style="margin-top: 10px;"><button type="button" class="btn modify" style="margin-left: 80%; box-shadow: 0px 3px 5px gray;" onclick="modify();">정보 수정</button></div>
         </form>
         </div>
     </div>
@@ -61,7 +64,7 @@
 	<script>
 			function modify() {
 				$(".myinfo").prop("readonly", false);
-				$(".myinfo").css("border", "");
+				$(".myinfo").css("box-shadow", "0px 0px 5px gray");
 				$(".modify").text("저  장");
 				$(".modify").click(function() {
 					$(".modify").prop("type", "submit");

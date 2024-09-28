@@ -38,7 +38,7 @@ html, body {
 	height: 50px;
 }
 
-#side-bar ul li a {
+.inquiry-menu {
 	text-decoration: none;
 	color: #000;
 	display: block;
@@ -51,9 +51,10 @@ html, body {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#side-bar ul li a:hover {
-	text-decoration: underline;
+.inquiry-menu:hover {
+	text-decoration: none;
 	font-weight: 700;
+	color: black;
 }
 
 /* 여기까지 사이드바 */

@@ -10,6 +10,10 @@
 
     
 </head>
+<header>
+		<jsp:include page="../common/header.jsp"></jsp:include>
+	</header>
+<div id="bodySection">
     <jsp:include page="myPageNav.jsp"></jsp:include>
     <div class="content">
         <div class="comment-list">
@@ -20,7 +24,7 @@
                 <img src="${ myReply.img }" alt="Group Image">
                 <div class="comment-info">
                     <h3>${ myReply.title }</h3>
-                    <h6>${ myReply.createDate }</h6>
+                    <p>${ myReply.createDate }</p>
                     <p>${ myReply.reply }</p>
                 </div>
             </div>

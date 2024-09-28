@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.h2.chuizone.customerServicePage.model.dto.InquiryBoardDto;
 import com.h2.chuizone.customerServicePage.model.service.CustomerService;
-import com.h2.chuizone.customerServicePage.model.vo.Board;
 
 /**
  * Servlet implementation class inquiryWriteController
@@ -37,20 +37,19 @@ public class InquiryWriteController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * 1:1문의 게시글 작성글을 저장하는 서블릿
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String userNo = request.getParameter("userNo");
-		String kindOfBoard = request.getParameter("kindOfBoard");
-		String inquiryGroup = request.getParameter("inquiryGroup");
-		String inquiryTitle = request.getParameter("inquiryTitle");
+		String kindOfBoard = request.getParameter("kindOfBoard");		// 게시글 종류(소모임 게시글, 공지사항 게시글, 1:1문의 게시글 등...)
+		String inquiryGroup = request.getParameter("inquiryGroup");		// 문의 분류(계정관련 문의, 소모임 이용관련 문의 등등 ...)
+		String inquiryTitle = request.getParameter("inquiryTitle");		
 		String inquiryContent = request.getParameter("inquiryContent");
-		Collection<Part> parts = request.getParts();
-		String path = request.getServletContext().getRealPath("/resources/uploadFiles/");
-		StringBuilder originFileNames = new StringBuilder();
+		Collection<Part> parts = request.getParts();					// Part객체는 enctype="multipart/form-data" 속성을 가진 form 태그에서 전달된 모든 속성(문자열뿐만 아니라 파일 객체까지도)을 받음
+		String path = request.getServletContext().getRealPath("/resources/uploadFiles/");	// 첨부된 파일을 저장할 실제 컴퓨터의 경로를 추출 (C://...)
+		StringBuilder originFileNames = new StringBuilder();	
 		StringBuilder changeFileNames = new StringBuilder();
 		int i = 0;
 		int result;
@@ -61,7 +60,7 @@ public class InquiryWriteController extends HttpServlet {
 			// 객체에서 name을 추출해서 upfile(첨부파일 input의 name)이 아닐 경우 continue;
 			if (!part.getName().equals("upfile"))
 				continue;
-			// 2차로 upfile의 value일 때 제출된 파일명을 확인하여 ""(첨부파일이 없을 시 빈 문자열로 옴)
+			// 2차로 name = upfile의 value일 때 제출된 파일명을 확인하여 ""(첨부파일이 없을 시 빈 문자열로 옴)
 			// 가 아닐 경우 첨부파일 처리절차 실행
 			if(!part.getSubmittedFileName().isEmpty()) {
 				
@@ -69,7 +68,7 @@ public class InquiryWriteController extends HttpServlet {
 				byte[] buf = new byte[1024];
 				String originFileName = part.getSubmittedFileName();
 
-				// 파읾령 변환
+				// 파읾명 변환
 				// 1) 파일 업로드 시간(년월일시분초)
 				String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 				// 2) 5자리 랜덤값 : Math.random()
@@ -81,6 +80,7 @@ public class InquiryWriteController extends HttpServlet {
 				// 업로드 시간(밀리초 단위) + 랜덤값(5자리) + 확장자
 				String changeFileName = currentTime + randNum + ext;
 
+				// 첨부된 파일 객체에서 inputStream을 얻고, 실제 파일을 저장할 물리적 경로(path)와 변환 파일명을 합하여 outputStream을 얻어 읽은 내용을 경로상에 저장
 				try (BufferedInputStream bis = new BufferedInputStream(part.getInputStream());
 						BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + changeFileName))) {
 					while ((num = bis.read(buf)) != -1) {
@@ -89,10 +89,11 @@ public class InquiryWriteController extends HttpServlet {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
+				
+				// DB에 저장하는 변환 파일명은 1:1문의 게시글 조회 페이지에서 첨부파일을 다운로드 할 수 있도록(추후 (contextPath/)resources/upFiles/chageName으로 다운로드 링크를 얻을 수 있도록 저장)
 				if(!originFileName.isEmpty() && !changeFileName.isEmpty() ) {
 					originFileNames.append(originFileName);
-					originFileNames.append(",");
+					originFileNames.append(",");	// 첨부파일이 여러개일 시 ","로 구분하여 저장
 					changeFileNames.append("resources/uploadFiles/" + changeFileName); // 저장된 물리경로 + 변환된 첨부파일명
 					changeFileNames.append(",");
 				}
@@ -102,23 +103,27 @@ public class InquiryWriteController extends HttpServlet {
 			
 		}
 		
+		// 맨 끝에 붙은 "," 구분자 제거
 		if(originFileNames.length()>0 && changeFileNames.length()>0) {
 			originFileNames.delete(originFileNames.length() - 1, originFileNames.length());
 			changeFileNames.delete(changeFileNames.length() - 1, changeFileNames.length());
 		}
 		
-		Board b = new Board();
+		// Board테이블에 저장할 데이터 담음
+		InquiryBoardDto b = new InquiryBoardDto();
 		b.setUserNo(userNo);
 		b.setKindOfBoard(kindOfBoard);
 		b.setBoardTitle(inquiryTitle);
 		b.setBoardContent(inquiryContent);
 		
-		Board b1 = new Board();
+		// Inquiry 테이블에 저장할 데이터 담음
+		InquiryBoardDto b1 = new InquiryBoardDto();
 		b1.setInquiryGroup(inquiryGroup);
 		b1.setKindOfBoard(kindOfBoard);
 		b1.setOriginFileNames(originFileNames.toString());
 		b1.setChangeFileNames(changeFileNames.toString());
 		
+		// Board 테이블과 inquiry 테이블에 각각 insert 수행 후 반환된 boardNo값과 inquiryNo값을 두 테이블의 연결테이블인 BoardInquiry테이블에 담기 위해 각각 구분하여 전달
 		result = new CustomerService().insertInquiryBoard(b, b1);
 		
 		

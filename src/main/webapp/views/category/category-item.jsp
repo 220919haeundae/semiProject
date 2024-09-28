@@ -119,7 +119,7 @@
 
 	<script>
 		function showBoard(id) {
-			location.href="/hobbyharvest/showBoard.me?board_id=" + id;
+			location.href="showBoard.me?board_id=" + id;
 		}
 	</script>
 </body>

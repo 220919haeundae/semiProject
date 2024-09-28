@@ -32,7 +32,7 @@ public class UpdateCalenderBoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		int categoryBoardNo = Integer.parseInt(request.getParameter("categoryBoardNo"));
-		String clubName = request.getParameter("clubName");
+		int cboardNo = Integer.parseInt(request.getParameter("cboardNo"));
 		
 		CalenderService calenderService = new CalenderServiceImpl();
 		CalenderDto calenderDto = calenderService.selectCalenderBoardListByBoardNo(boardNo);
@@ -42,7 +42,7 @@ public class UpdateCalenderBoardController extends HttpServlet {
 		request.setAttribute("endDate", calenderDto.getEndDate());
 		request.setAttribute("content", calenderDto.getContent());
 		request.setAttribute("title", calenderDto.getTitle());
-		request.setAttribute("clubName", clubName);
+		request.setAttribute("cboardNo", cboardNo);
 		request.setAttribute("boardNo", boardNo);
 		
 		request.getRequestDispatcher("views/calender/calender-modify.jsp").forward(request, response);

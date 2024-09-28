@@ -13,11 +13,11 @@
 
 <style>
 #category-menu {
-	border: 1px solid #d9d9d9;
-	height: 150px;
+	border: none;
+	height: 70px;
 	width: 1500px;
-	border-radius: 40px;
-	background-color: #d9d9d9;
+	border-radius: 20px;
+	background-color: #ffe3e3;
 	margin: auto;
 	margin-top: 30px;
 	display: flex;
@@ -205,7 +205,7 @@
 
 .category-frame {
 	margin: 0px 10px;
-	font-size: 30pt;
+	font-size: 18pt;
 	width: 20%;
 	text-align: center;
 	cursor: pointer;

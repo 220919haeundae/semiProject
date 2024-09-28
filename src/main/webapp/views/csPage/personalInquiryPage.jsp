@@ -43,7 +43,7 @@
 
 		<div class="under-side justify-content-center row" style="margin: auto; display: flex;">
 
-			<div class="input-group mb-3 col-sm-2" style="visibility:none; border-radius: 20px; border: 1px solid lightgray; padding: 0;">
+			<div class="input-group mb-3 col-sm-2" style="visibility: hidden; border-radius: 20px; border: 1px solid lightgray; padding: 0;">
 				<input type="text" class="form-control" style="border: none; border-radius: 20px;" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
 				<button class="btn btn-outline-none bi bi-search" type="button" id="button-addon2" style="border-radius: 20px;"></button>
 			</div>

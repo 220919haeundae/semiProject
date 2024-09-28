@@ -213,8 +213,8 @@
 		
 		<form action="" method="post" id="postForm">
 			<input type="hidden" name="boardNo" value="${ board_data.boardNo }">
+			<input type="hidden" name="cboardNo" value="${ cboardNo }">
 			<input type="hidden" name="categoryBoardNo" value="${ board_data.categoryBoardNo }">
-			<input type="hidden" name="clubName" value="${ clubName }">
 		</form>
 			
         <div class="calender-view-area">

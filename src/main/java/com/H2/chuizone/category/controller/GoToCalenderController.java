@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.h2.chuizone.calender.model.dto.CalenderDto;
 import com.h2.chuizone.calender.model.service.CalenderService;
 import com.h2.chuizone.calender.model.service.CalenderServiceImpl;
+import com.h2.chuizone.category.model.dto.SelectCategoryBoardListDto;
+import com.h2.chuizone.common.board.model.service.BoardService;
+import com.h2.chuizone.common.board.model.service.BoardServiceImpl;
 
 /**
  * Servlet implementation class goToCalenderController
@@ -32,15 +35,21 @@ public class GoToCalenderController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int categoryBoardNo = Integer.parseInt(request.getParameter("categoryBoardNo"));
-		String clubName = request.getParameter("clubName");
-		CalenderService calenderService = new CalenderServiceImpl();
+		request.setCharacterEncoding("UTF-8");
 		
+		int categoryBoardNo = Integer.parseInt(request.getParameter("categoryBoardNo"));
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		CalenderService calenderService = new CalenderServiceImpl();
+		BoardService boardService = new BoardServiceImpl();
+		
+		SelectCategoryBoardListDto selectCategoryBoardListDto = boardService.selectCategoryBoard(boardNo);
 		List<CalenderDto> calenderDtoList = calenderService.selectCalenderBoardList(categoryBoardNo);
 		
+		request.setAttribute("clubName", selectCategoryBoardListDto.getClubName());
 		request.setAttribute("categoryBoardNo", categoryBoardNo);
-		request.setAttribute("clubName", clubName);
 		request.setAttribute("calender", calenderDtoList);
+		request.setAttribute("boardNo", boardNo);
 		
 		request.getRequestDispatcher("views/calender/calender.jsp").forward(request, response);
 	}

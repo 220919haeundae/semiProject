@@ -473,6 +473,7 @@
 
 			<form action="" method="post" id="postForm">
 				<input type="hidden" name="boardNo" value="${ board_data.boardNo }">
+				<input type="hidden" name="categoryBoardNo" value="${ board_data.categoryBoardNo }">
 			</form>
 
 			<div id="section-main-image">
@@ -618,7 +619,8 @@
 		let reviews = <%=jsonReview%>;
 		
     	function goToCalender() {
-    		location.href = "calender.me?categoryBoardNo=" + ${ board_data.categoryBoardNo } + "&clubName=" + '${ board_data.clubName }';
+    		document.getElementById('postForm').action = "calender.me";
+    		document.getElementById('postForm').submit();
     	}
     	
     	function join() {

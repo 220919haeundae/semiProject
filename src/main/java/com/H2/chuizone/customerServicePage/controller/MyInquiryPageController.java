@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.h2.chuizone.customerServicePage.model.dto.InquiryBoardDto;
 import com.h2.chuizone.customerServicePage.model.service.CustomerService;
-import com.h2.chuizone.customerServicePage.model.vo.Board;
 import com.h2.chuizone.member.model.vo.Member;
 
 /**
@@ -28,7 +28,7 @@ public class MyInquiryPageController extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 1:1문의 게시글 상세페이지 조회 서블릿
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo()+"";
@@ -36,21 +36,18 @@ public class MyInquiryPageController extends HttpServlet {
 		System.out.println(userNo);
 		System.out.println(boardNo);
 		
-		Board myInquiry = new CustomerService().selectInquiry(userNo, boardNo);
-		
-		System.out.println(myInquiry);
-		if(myInquiry.getChangeFileNames() != null) {
-			String[] originFileNames = myInquiry.getOriginFileNames().split(",");
-			String[] changeFileNames = myInquiry.getChangeFileNames().split(",");
-			
-			request.setAttribute("orgFileNames", originFileNames);
-			request.setAttribute("chgFileNames", changeFileNames);
-			
-		}
-		
+		InquiryBoardDto myInquiry = new CustomerService().selectInquiry(userNo, boardNo);
 		
 		if( myInquiry != null) {
 			request.setAttribute("myInquiry", myInquiry);
+			
+			if(myInquiry.getChangeFileNames() != null) {
+				String[] originFileNames = myInquiry.getOriginFileNames().split(",");
+				String[] changeFileNames = myInquiry.getChangeFileNames().split(",");
+				request.setAttribute("orgFileNames", originFileNames);
+				request.setAttribute("chgFileNames", changeFileNames);
+			}
+			
 			request.getRequestDispatcher("views/csPage/myInquiryPage.jsp").forward(request, response);
 		} else {
 			request.setAttribute("alertMsg", "문의사항 조회에 실패했습니다.");

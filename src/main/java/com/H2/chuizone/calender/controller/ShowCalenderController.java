@@ -39,8 +39,8 @@ public class ShowCalenderController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String clubName = request.getParameter("clubName");
-		request.setAttribute("clubName", clubName);
+		String cboardNo = request.getParameter("cboardNo");
+		request.setAttribute("cboardNo", cboardNo);
 		
 		ReplyService replyService = new ReplyServiceImpl();
 		List<ReplyDto> replyList = replyService.selectReplyList(boardNo);
